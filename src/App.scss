@@ -1,0 +1,35 @@
+.root {
+    .content-wrapper {
+        background: #1D1D1D;
+
+        header {
+            padding-left: 27px;
+            padding-top: 25px;
+            padding-right: 34px;
+            padding-bottom: 21px;
+
+            .bars {
+                width: 22px !important;
+                margin-right: 19px;
+            }
+
+            span {
+                width: 307px;
+                height: 27px;
+                font-family: Open Sans;
+                font-style: normal;
+                font-weight: bold;
+                line-height: normal;
+                font-size: 18px;
+                color: #21D2F9;
+
+                &:nth-of-type(2) {
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
+}
+
+
+
