@@ -19,22 +19,22 @@ class App extends Component {
 
                         </div>
                         <div className="content-wrapper">
-                            <header className="row">
-                                <div className="header-left-block col-xl-6 col-md-6 col-sm-6 col-xs-12">
+                            <header className="d-flex">
+                                <div className="header-left-block">
                                     <FontAwesomeIcon className="fa-my-bars" color="#E3E3E3" icon={faBars} />
                                     <span>Eagle&nbsp;</span>
                                     <span>/ Dispatch</span>
                                 </div>
-                                <div className="header-right-block col-xl-6 col-md-6 col-sm-6 col-xs-12 float-sm-right text-sm-right float-md-right text-md-right float-xl-right text-xl-right">
+                                <div className="header-right-block">
                                     <ul>
                                         <li><span>View:</span></li>
                                         <li>
                                             <FontAwesomeIcon className="fa-my-list" color="#E3E3E3" icon={faList} />
-                                            <span>Standard</span>
+                                            <span data-type="aw-label">Standard</span>
                                         </li>
                                         <li>
                                             <FontAwesomeIcon className="fa-my-list" color="#E3E3E3" icon={faList} />
-                                            <span>Dashboard</span>
+                                            <span data-type="aw-label">Dashboard</span>
                                         </li>
                                     </ul>
                                 </div>
