@@ -1,7 +1,65 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
 .dashboard-container {
     background: #1E1E1E;
+    display: flex;
+    flex-direction: column;
 
-    h1 {
-        color: red;
+    .tab-block {
+        display: flex;
+        padding-right: 20px;
+
+        .tab-block__left {
+            flex: auto;
+
+            span {
+                width: 138.77px;
+                height: 54px;
+                font-family: Open Sans;
+                font-style: normal;
+                font-weight: bold;
+                line-height: normal;
+                font-size: 14px;
+                text-align: center;
+                color: #646464;
+                display: inline-block;
+                padding: 17px 0;
+                cursor: pointer;
+            }
+        }
+
+        .tab-block__right {
+            flex: initial;
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            input {
+                font-family: Open Sans;
+                font-style: normal;
+                font-weight: normal;
+                line-height: normal;
+                font-size: 16px;
+                height: 22px;
+                color: #FFFFFF;
+                background: #1E1E1E;
+                width: 90px;
+                padding: 0 10px;
+            }
+
+            &::after {
+                font-family: FontAwesome;
+                content: "\f002";
+                color: #FFFFFF;
+                position: absolute;
+                top: 22px;
+                right: 2px;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .job-list-block {
+        padding: 24px;
     }
 }
