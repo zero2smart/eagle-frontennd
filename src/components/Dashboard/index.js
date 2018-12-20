@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./index.scss";
+import JobManagement from './JobManagement';
 
 class Dashboard extends Component {
     ACTIVE_TAB = 0;
@@ -36,7 +37,7 @@ class Dashboard extends Component {
                     </div>
                 </div>
                 <div className="job-list-block">
-
+                    <JobManagement />
                 </div>
             </div>
         );

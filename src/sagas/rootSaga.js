@@ -5,6 +5,7 @@ import * as dashboardSaga from './dashboardSaga';
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
     yield all([
-        fork(dashboardSaga.watchToggleSideBarAsync)
+        fork(dashboardSaga.watchToggleSideBarAsync),
+        fork(dashboardSaga.watchGetJobsAsync)
     ]);
 }

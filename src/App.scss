@@ -45,6 +45,11 @@
     .root .content-wrapper header {
         flex-direction: column;
     }
+
+    .dashboard-container .tab-block .tab-block__right::after {
+        top: 21px;
+        right: 2px;
+    }
 }
 
 // Extra small devices (portrait phones, less than 576px)
@@ -56,5 +61,19 @@
     .root .content-wrapper header .header-right-block ul {
         flex-direction: column;
         align-items: baseline;
+    }
+
+    .dashboard-container .tab-block {
+        flex-direction: column;
+    }
+
+    .dashboard-container .tab-block .tab-block__right input {
+        width: 100%;
+        right: 0;
+    }
+
+    .dashboard-container .tab-block .tab-block__right::after {
+        top: 7px;
+        right: 2px;
     }
 }
