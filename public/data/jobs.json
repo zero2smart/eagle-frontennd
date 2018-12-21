@@ -6,7 +6,7 @@
         "material": "Blended Fill",
         "customer_name": "Ozinga",
         "job_site": "2551 SW 13TH",
-        "haul_rate": "5.30",
+        "haul_rate": 5.3,
         "quantity": "60-70 Loads"
     },
     {
@@ -16,7 +16,7 @@
         "material": "FDOT",
         "customer_name": "S. Dade Landfill",
         "job_site": "1200 SW 145 AVE",
-        "haul_rate": "3.40",
+        "haul_rate": 3.4,
         "quantity": "22 Loads"
     },
     {

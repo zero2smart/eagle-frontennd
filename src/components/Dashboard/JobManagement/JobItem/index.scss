@@ -1,3 +1,49 @@
-.job-item-container {
+tr {
+    border-bottom: 2px solid #1D1D1D;
+    color: #E7E7E7;
 
+    th {
+        height: 32px;
+        border-radius: 4px;
+        position: relative;
+        border: none;
+        padding: 15px 0 !important;
+        line-height: 1px;
+        padding-left: 25px !important;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: normal;
+        color: #21D2F9;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 9px;
+            width: 32px;
+            height: 14px;
+            background: #646464;
+            border-radius: 0 0 4px 4px;
+            transform: rotate(90deg);
+        }
+    }
+
+    td {
+        height: 32px;
+        border: none;
+        padding: 15px 0 !important;
+        line-height: 1px;
+        font-size: 12px;
+
+        .fa-my-plus-square {
+            color: #5BBE38;
+            background-color: #FFFFFF;
+            border-radius: 4px;
+            font-size: 20px;
+        }
+
+        &:last-child {
+            padding: 5px 0 0 0 !important;
+        }
+    }
 }

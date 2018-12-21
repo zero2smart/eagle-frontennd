@@ -4,6 +4,7 @@ import './index.scss';
 import JobItem from './JobItem';
 import { getJobsAction } from '../../../actions';
 import { connect } from 'react-redux';
+import { Table } from 'reactstrap';
 
 class JobManagement extends Component {
     constructor(props) {
@@ -17,9 +18,13 @@ class JobManagement extends Component {
     render() {
         return (
             <div className="job-management-container">
-                {this.props.jobs.map(job => (
-                    <JobItem key={job.job_id} job={job} />
-                ))}
+                <Table dark>
+                    <tbody>
+                        {this.props.jobs.map(job => (
+                            <JobItem key={job.job_id} job={job} />
+                        ))}
+                    </tbody>
+                </Table>
             </div>
         );
     }
