@@ -23,8 +23,10 @@ class JobItem extends Component {
                 <td>
                     <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} />
                 </td>
+                <td>
+                    <div></div>
+                </td>
             </tr>
-
         );
     }
 }

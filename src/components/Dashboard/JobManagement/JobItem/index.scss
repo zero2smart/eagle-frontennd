@@ -42,8 +42,48 @@ tr {
             font-size: 20px;
         }
 
-        &:last-child {
-            padding: 5px 0 0 0 !important;
+        &:nth-child(8) {
+            width: 30px;
+        }
+
+        &:nth-child(9) {
+            padding: 5px 5px !important;
+            position: relative;
+            width: 25%;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 5px;
+                left: -5px;
+                width: 1px;
+                height: 20px;
+                background-color: #616161;
+            }
+        }
+
+        &:nth-child(10) {
+            padding: 5px 5px !important;
+            width: 33px;
+            position: relative;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 5px;
+                left: -5px;
+                width: 1px;
+                height: 20px;
+                background-color: #616161;
+            }
+
+            div {
+                width: 18px;
+                height: 18px;
+                border: 1px solid #616161;
+                box-sizing: border-box;
+                border-radius: 4px;
+            }
         }
     }
 }
