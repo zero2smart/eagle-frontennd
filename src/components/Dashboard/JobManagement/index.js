@@ -18,7 +18,7 @@ class JobManagement extends Component {
     render() {
         return (
             <div className="job-management-container">
-                <Table dark>
+                <Table>
                     <tbody>
                         {this.props.jobs.map(job => (
                             <JobItem key={job.job_id} job={job} />
