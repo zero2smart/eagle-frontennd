@@ -7,6 +7,12 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 class JobItem extends Component {
     constructor(props) {
         super(props);
+
+        this.toggleSideBar = this.toggleSideBar.bind(this);
+    }
+
+    toggleSideBar() {
+
     }
 
     render() {
