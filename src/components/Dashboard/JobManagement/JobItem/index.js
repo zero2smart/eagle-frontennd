@@ -4,6 +4,7 @@ import './index.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import faPlus from '../../../../assets/images/plus-symbol-in-a-rounded-black-square.png';
+import faMinus from '../../../../assets/images/minus-sign-inside-a-black-circle.png';
 
 class JobItem extends Component {
     constructor(props) {
@@ -44,7 +45,10 @@ class JobItem extends Component {
                     <td>{this.props.job.haul_rate}</td>
                     <td>
                         {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
-                        <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
+                        {!this.state.showTruckList ?
+                            <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
+                            : <img src={faMinus} className="fa-my-minus-square" alt="Minus Square" width={20} height={20} onClick={this.toggleTruckList} />
+                        }
                     </td>
                     <td>
                         <div></div>
@@ -62,7 +66,6 @@ class JobItem extends Component {
                     </div>
                 </tr>
             </React.Fragment>
-
         );
     }
 }
