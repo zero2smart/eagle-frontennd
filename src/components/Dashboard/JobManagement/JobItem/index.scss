@@ -34,6 +34,13 @@ tr {
             padding: 9px 12px;
             width: 72px;
 
+            .d-flex-wrap {
+                display: block;
+                width: 100vw;
+                padding-right: 48px;
+                overflow: auto;
+            }
+
             &:before {
                 content: '';
                 position: absolute;
@@ -46,7 +53,7 @@ tr {
             }
 
             .truck-number {
-                margin-left: 10px;
+                margin: 5px 0 5px 10px;
                 font-family: Open Sans;
                 font-style: normal;
                 font-weight: 600;
@@ -57,7 +64,9 @@ tr {
                 border-radius: 4px;
                 width: 35px;
                 height: 18px;
+                float: left;
                 border: 1px solid #2FB5D2;
+                cursor: pointer;
             }
         }
     }

@@ -11,12 +11,15 @@ class JobItem extends Component {
         super(props);
 
         this.state = {
-            showTruckList: false
+            showTruckList: false,
+            truckStatusList: []
         };
 
         this.toggleSideBar = this.toggleSideBar.bind(this);
         this.toggleTruckList = this.toggleTruckList.bind(this);
         this.addTruck = this.addTruck.bind(this);
+
+        this.truckElements = [];
     }
 
     toggleSideBar() {
@@ -27,8 +30,9 @@ class JobItem extends Component {
         this.setState({ showTruckList: !this.state.showTruckList });
     }
 
-    addTruck() {
-
+    addTruck(i) {
+        this.truckElements[i].style.color = '#626269';
+        this.truckElements[i].style.borderColor = '#626269';
     }
 
     render() {
@@ -56,9 +60,10 @@ class JobItem extends Component {
                 </tr>
                 <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`}>
                     <div className="truck-list">
-                        <div className="d-inline-flex">
-                            {[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110].map(n => (
-                                <div className="truck-number" onClick={this.addTruck}>
+                        <div className="d-flex-wrap">
+                            {[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
+                            121, 122, 123, 124, 125, 126, 127, 128].map((n, i) => (
+                                <div className="truck-number" onClick={() => this.addTruck(i)} ref={node => this.truckElements[i] = node}>
                                     {n}
                                 </div>
                             ))}
