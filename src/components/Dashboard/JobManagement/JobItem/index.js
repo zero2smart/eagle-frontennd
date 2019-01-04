@@ -12,7 +12,8 @@ class JobItem extends Component {
 
         this.state = {
             showTruckList: false,
-            truckStatusList: []
+            truckStatusList: [],
+            jobList: []
         };
 
         this.toggleSideBar = this.toggleSideBar.bind(this);
@@ -30,9 +31,20 @@ class JobItem extends Component {
         this.setState({ showTruckList: !this.state.showTruckList });
     }
 
-    addTruck(i) {
+    addTruck(n, i) {
         this.truckElements[i].style.color = '#626269';
         this.truckElements[i].style.borderColor = '#626269';
+        this.setState(prev => {
+            let tmp = prev.jobList;
+            tmp.push(n);
+            return {
+                jobList: tmp
+            };
+        });
+    }
+
+    static getDerivedStateFromProps(props, state) {
+
     }
 
     render() {
@@ -48,14 +60,24 @@ class JobItem extends Component {
                     <td>{this.props.job.quantity}</td>
                     <td>{this.props.job.haul_rate}</td>
                     <td>
-                        {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
-                        {!this.state.showTruckList ?
-                            <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
-                            : <img src={faMinus} className="fa-my-minus-square" alt="Minus Square" width={20} height={20} onClick={this.toggleTruckList} />
-                        }
+                        <div className="job-list">
+                            <div>
+                                {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
+                                {!this.state.showTruckList ?
+                                    <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
+                                    : <img src={faMinus} className="fa-my-minus-square" alt="Minus Square" width={20} height={20} onClick={this.toggleTruckList} />
+                                }
+                            </div>
+                            <div className="job-item">
+                                {this.state.jobList.map((n, i) => (
+                                    <div className="job-number">
+                                        {n}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </td>
                     <td>
-                        <div></div>
                     </td>
                 </tr>
                 <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`}>
@@ -63,7 +85,7 @@ class JobItem extends Component {
                         <div className="d-flex-wrap">
                             {[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
                             121, 122, 123, 124, 125, 126, 127, 128].map((n, i) => (
-                                <div className="truck-number" onClick={() => this.addTruck(i)} ref={node => this.truckElements[i] = node}>
+                                <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node}>
                                     {n}
                                 </div>
                             ))}

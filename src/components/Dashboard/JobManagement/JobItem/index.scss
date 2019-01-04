@@ -79,6 +79,37 @@ tr {
         line-height: 1px;
         font-size: 12px;
 
+        .job-list {
+            display: flex;
+            align-items: center;
+
+            .job-item {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                .job-number {
+                    margin: 0 5px;
+                    font-family: Open Sans;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    font-size: 11px;
+                    text-align: center;
+                    color: #FFF;
+                    background: #2FB5D2;
+                    border-radius: 4px;
+                    width: 35px;
+                    height: 18px;
+                    float: left;
+                    border: 1px solid #2FB5D2;
+                    cursor: pointer;
+                }
+            }
+
+
+        }
+
         .fa-my-plus-square {
             color: #5BBE38;
             background-color: #FFFFFF;
