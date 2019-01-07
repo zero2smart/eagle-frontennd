@@ -78,6 +78,7 @@ class JobItem extends Component {
                         </div>
                     </td>
                     <td>
+                        <div></div>
                     </td>
                 </tr>
                 <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`}>
