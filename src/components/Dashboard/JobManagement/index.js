@@ -20,9 +20,16 @@ class JobManagement extends Component {
             <div className="job-management-container">
                 <Table>
                     <tbody>
-                        {this.props.jobs.map(job => (
-                            <JobItem key={job.job_id} job={job} />
-                        ))}
+                        {this.props.jobs.map((job, i) => {
+                            let isAllMinus = true;
+                            for (let j = 0; j < this.props.jobToggleStatus.length; j++) {
+                                if (this.props.jobToggleStatus[j] === true) {
+                                    isAllMinus = false;
+                                    break;
+                                }
+                            }
+                            return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? {opacity: '1'} : {}} />;
+                        })}
                     </tbody>
                 </Table>
             </div>
@@ -31,12 +38,16 @@ class JobManagement extends Component {
 }
 
 JobManagement.propTypes = {
-    jobs: PropTypes.array.isRequired
+    jobs: PropTypes.array.isRequired,
+    jobToggleStatus: PropTypes.array.isRequired
 }
 
-const mapStateToProps = state => ({
-    jobs: state.dashboard.jobs
-});
+const mapStateToProps = state => {
+    return {
+        jobs: state.dashboard.jobs,
+        jobToggleStatus: state.dashboard.jobToggleStatus
+    };
+};
 
 const mapDispatchToProps = dispatch => ({
     getJobsAction: () => dispatch(getJobsAction())

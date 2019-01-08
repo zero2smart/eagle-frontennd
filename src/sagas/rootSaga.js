@@ -6,6 +6,7 @@ import * as dashboardSaga from './dashboardSaga';
 export default function* rootSaga() {
     yield all([
         fork(dashboardSaga.watchToggleSideBarAsync),
-        fork(dashboardSaga.watchGetJobsAsync)
+        fork(dashboardSaga.watchGetJobsAsync),
+        fork(dashboardSaga.watchChangeJobToggleStatusAsync)
     ]);
 }

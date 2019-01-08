@@ -30,7 +30,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-    showSideBar: PropTypes.bool.isRequired
+    showSideBar: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({

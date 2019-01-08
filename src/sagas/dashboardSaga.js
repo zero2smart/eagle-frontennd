@@ -5,7 +5,10 @@ import {
     TOGGLE_SIDEBAR_FAILED,
     GET_JOBS,
     GET_JOBS_SUCCEEDED,
-    GET_JOBS_FAILED
+    GET_JOBS_FAILED,
+    CHANGE_JOB_TOGGLE_STATUS,
+    CHANGE_JOB_TOGGLE_STATUS_SUCCEEDED,
+    CHANGE_JOB_TOGGLE_STATUS_FAILED
 } from '../constants';
 import JobService from '../api/JobService';
 
@@ -26,10 +29,22 @@ function* getJobsAsync(action) {
     }
 }
 
+function* changeJobToggleStatusAsync(action) {
+    try {
+        yield put({ type: CHANGE_JOB_TOGGLE_STATUS_SUCCEEDED, payload: action.payload });
+    } catch (e) {
+        yield put({ type: CHANGE_JOB_TOGGLE_STATUS_FAILED, message: e.message });
+    }
+}
+
 export function* watchToggleSideBarAsync() {
     yield takeEvery(TOGGLE_SIDEBAR, toggleSideBarAsync);
 }
 
 export function* watchGetJobsAsync() {
     yield takeEvery(GET_JOBS, getJobsAsync);
+}
+
+export function* watchChangeJobToggleStatusAsync() {
+    yield takeEvery(CHANGE_JOB_TOGGLE_STATUS, changeJobToggleStatusAsync);
 }

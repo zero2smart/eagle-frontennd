@@ -52,7 +52,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-    showSideBar: PropTypes.bool.isRequired
+    showSideBar: PropTypes.bool.isRequired,
+    toggleSideBar: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

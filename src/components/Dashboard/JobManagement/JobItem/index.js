@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
+import { connect } from 'react-redux';
+import { changeJobToggleStatusAction } from '../../../../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import faPlus from '../../../../assets/images/plus-symbol-in-a-rounded-black-square.png';
@@ -28,7 +30,17 @@ class JobItem extends Component {
     }
 
     toggleTruckList() {
-        this.setState({ showTruckList: !this.state.showTruckList });
+        this.setState({ showTruckList: !this.state.showTruckList }, () => {
+            this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
+        });
+    }
+
+    componentDidMount() {
+        this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
+    }
+
+    componentDidUpdate(props, state) {
+        debugger;
     }
 
     addTruck(n, i) {
@@ -44,13 +56,13 @@ class JobItem extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-
+        return null;
     }
 
     render() {
         return (
             <React.Fragment>
-                <tr>
+                <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`}>
                     <th scope="row">{this.props.job.job_id}</th>
                     <td>{this.props.job.quarry_name}</td>
                     <td>{this.props.job.quarry_address}</td>
@@ -70,7 +82,7 @@ class JobItem extends Component {
                             </div>
                             <div className="job-item">
                                 {this.state.jobList.map((n, i) => (
-                                    <div className="job-number">
+                                    <div className="job-number" key={i}>
                                         {n}
                                     </div>
                                 ))}
@@ -86,7 +98,7 @@ class JobItem extends Component {
                         <div className="d-flex-wrap">
                             {[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
                             121, 122, 123, 124, 125, 126, 127, 128].map((n, i) => (
-                                <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node}>
+                                <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node} key={i}>
                                     {n}
                                 </div>
                             ))}
@@ -99,7 +111,18 @@ class JobItem extends Component {
 }
 
 JobItem.propTypes = {
-    job: PropTypes.object.isRequired
+    job: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    jobToggleStatus: PropTypes.array.isRequired,
+    changeJobToggleStatus: PropTypes.func.isRequired
 }
 
-export default JobItem;
+const mapStateToProps = state => ({
+    jobToggleStatus: state.dashboard.jobToggleStatus
+});
+
+const mapDispatchToProps = dispatch => ({
+    changeJobToggleStatus: (index, status) => dispatch(changeJobToggleStatusAction({ index: index, status: status }))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(JobItem);
