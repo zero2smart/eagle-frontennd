@@ -9,26 +9,40 @@ import { Table } from 'reactstrap';
 class JobManagement extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            jobToggleStatus: []
+        };
+
+        this.applyToggleStatus = this.applyToggleStatus.bind(this);
     }
 
     componentDidMount() {
         this.props.getJobsAction();
     }
 
+    applyToggleStatus(jts) {
+        this.setState({ jobToggleStatus: jts });
+    }
+
     render() {
+        let jts = this.state.jobToggleStatus;
+
         return (
             <div className="job-management-container">
                 <Table>
                     <tbody>
-                        {this.props.jobs.map((job, i) => {
+                        {
+                            this.props.jobs.map((job, i) => {
                             let isAllMinus = true;
-                            for (let j = 0; j < this.props.jobToggleStatus.length; j++) {
-                                if (this.props.jobToggleStatus[j] === true) {
+
+                            for (let j = 0; j < jts.length; j++) {
+                                if (jts[j] === true) {
                                     isAllMinus = false;
                                     break;
                                 }
                             }
-                            return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? {opacity: '1'} : {}} />;
+                            return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? {opacity: 1} : {}} applyToggleStatus={this.applyToggleStatus} />;
                         })}
                     </tbody>
                 </Table>
@@ -38,16 +52,12 @@ class JobManagement extends Component {
 }
 
 JobManagement.propTypes = {
-    jobs: PropTypes.array.isRequired,
-    jobToggleStatus: PropTypes.array.isRequired
+    jobs: PropTypes.array.isRequired
 }
 
-const mapStateToProps = state => {
-    return {
-        jobs: state.dashboard.jobs,
-        jobToggleStatus: state.dashboard.jobToggleStatus
-    };
-};
+const mapStateToProps = state => ({
+    jobs: state.dashboard.jobs
+});
 
 const mapDispatchToProps = dispatch => ({
     getJobsAction: () => dispatch(getJobsAction())

@@ -32,6 +32,7 @@ class JobItem extends Component {
     toggleTruckList() {
         this.setState({ showTruckList: !this.state.showTruckList }, () => {
             this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
+            this.props.applyToggleStatus(this.props.jobToggleStatus);
         });
     }
 
@@ -39,9 +40,12 @@ class JobItem extends Component {
         this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
     }
 
-    componentDidUpdate(props, state) {
-        debugger;
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     debugger;
+    //     if (prevProps.jobToggleStatus !== this.props.jobToggleStatus) {
+    //         this.props.applyToggleStatus(prevProps.jobToggleStatus);
+    //     }
+    // }
 
     addTruck(n, i) {
         this.truckElements[i].style.color = '#626269';
@@ -55,14 +59,10 @@ class JobItem extends Component {
         });
     }
 
-    static getDerivedStateFromProps(props, state) {
-        return null;
-    }
-
     render() {
         return (
             <React.Fragment>
-                <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`}>
+                <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`} style={this.props.style}>
                     <th scope="row">{this.props.job.job_id}</th>
                     <td>{this.props.job.quarry_name}</td>
                     <td>{this.props.job.quarry_address}</td>
@@ -93,7 +93,7 @@ class JobItem extends Component {
                         <div></div>
                     </td>
                 </tr>
-                <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`}>
+                <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`} style={this.props.style}>
                     <div className="truck-list">
                         <div className="d-flex-wrap">
                             {[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
@@ -114,7 +114,9 @@ JobItem.propTypes = {
     job: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     jobToggleStatus: PropTypes.array.isRequired,
-    changeJobToggleStatus: PropTypes.func.isRequired
+    changeJobToggleStatus: PropTypes.func.isRequired,
+    applyToggleStatus: PropTypes.func.isRequired,
+    style: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
