@@ -35,10 +35,27 @@ tr {
             width: 72px;
 
             .d-flex-wrap {
-                display: block;
+                display: flex;
+                flex-wrap: wrap;
                 width: 100vw;
                 padding-right: 48px;
                 overflow: auto;
+            }
+
+            .threedot {
+                position: absolute;
+                left: 5px;
+                bottom: 50%;
+                height: 30px;
+
+                div {
+                    width: 4px;
+                    height: 4px;
+                    margin-top: 5px;
+                    z-index: 99999;
+                    background: #282828;
+                    border-radius: 50%;
+                }
             }
 
             &:before {
@@ -64,7 +81,6 @@ tr {
                 border-radius: 4px;
                 width: 35px;
                 height: 18px;
-                float: left;
                 border: 1px solid #2FB5D2;
                 cursor: pointer;
             }

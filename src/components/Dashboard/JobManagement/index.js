@@ -21,6 +21,10 @@ class JobManagement extends Component {
         this.props.getJobsAction();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+
+    }
+
     applyToggleStatus(jts) {
         this.setState({ jobToggleStatus: jts });
     }
@@ -52,11 +56,13 @@ class JobManagement extends Component {
 }
 
 JobManagement.propTypes = {
-    jobs: PropTypes.array.isRequired
+    jobs: PropTypes.array.isRequired,
+    jobToggleStatus: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
-    jobs: state.dashboard.jobs
+    jobs: state.dashboard.jobs,
+    jobToggleStatus: state.dashboard.jobToggleStatus
 });
 
 const mapDispatchToProps = dispatch => ({

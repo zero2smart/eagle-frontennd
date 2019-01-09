@@ -40,13 +40,6 @@ class JobItem extends Component {
         this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     debugger;
-    //     if (prevProps.jobToggleStatus !== this.props.jobToggleStatus) {
-    //         this.props.applyToggleStatus(prevProps.jobToggleStatus);
-    //     }
-    // }
-
     addTruck(n, i) {
         this.truckElements[i].style.color = '#626269';
         this.truckElements[i].style.borderColor = '#626269';
@@ -95,6 +88,11 @@ class JobItem extends Component {
                 </tr>
                 <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`} style={this.props.style}>
                     <div className="truck-list">
+                        <div className="threedot">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div className="d-flex-wrap">
                             {[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
                             121, 122, 123, 124, 125, 126, 127, 128].map((n, i) => (
