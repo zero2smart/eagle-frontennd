@@ -1,0 +1,62 @@
+.modal-content {
+    background: #282828 !important;
+    box-shadow: 3px 4px 34px rgba(14, 14, 14, 0.3) !important;
+    border-radius: 4px !important;
+    padding-left: 53px;
+    padding-right: 39px;
+    position: relative;
+
+    .left-bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 14px;
+        height: 100%;
+        background: #CFD15D;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .header-options {
+        position: absolute;
+        right: 72px;
+        top: 28px;
+        color: #fff;
+        display: flex;
+
+        .rectangle {
+            width: 23px;
+            height: 22px;
+            border: 1px solid #616161;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 22px;
+            margin-left: 6px;
+            color: #737373;
+            border: 1px solid #737373;
+            box-sizing: border-box;
+            border-radius: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+            line-height: 13px;
+            cursor: pointer;
+        }
+    }
+
+    .modal-header {
+        padding: 26px 0;
+        border-bottom: none;
+
+        .modal-title {
+            font-family: Open Sans;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            font-size: 26px;
+            color: #21D2F9;
+        }
+    }
+}

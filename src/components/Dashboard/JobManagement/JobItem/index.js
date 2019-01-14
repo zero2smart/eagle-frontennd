@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import faPlus from '../../../../assets/images/plus-symbol-in-a-rounded-black-square.png';
 import faMinus from '../../../../assets/images/minus-sign-inside-a-black-circle.png';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import EditJob from './EditJob';
 
 class JobItem extends Component {
     constructor(props) {
@@ -62,8 +62,6 @@ class JobItem extends Component {
     }
 
     render() {
-        const closeBtn = <button className="close" onClick={this.openEditJobDialog}>&times;</button>;
-
         return (
             <React.Fragment>
                 <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`} style={this.props.style}>
@@ -114,16 +112,10 @@ class JobItem extends Component {
                         </div>
                     </div>
                 </tr>
-                <Modal isOpen={this.state.modal} toggle={this.openEditJobDialog} className={this.props.className}>
-                    <ModalHeader toggle={this.openEditJobDialog} close={closeBtn}>Modal title</ModalHeader>
-                    <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                        <Button color="secondary" onClick={this.openEditJobDialog}>Cancel</Button>
-                    </ModalFooter>
-                </Modal>
+                <EditJob
+                    className="edit-job-modal"
+                    modal={this.state.modal}
+                    openEditJobDialog={this.openEditJobDialog} />
             </React.Fragment>
         );
     }
