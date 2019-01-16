@@ -115,6 +115,7 @@ class JobItem extends Component {
                 <EditJob
                     className="edit-job-modal"
                     modal={this.state.modal}
+                    trucks={this.state.jobList}
                     openEditJobDialog={this.openEditJobDialog} />
             </React.Fragment>
         );

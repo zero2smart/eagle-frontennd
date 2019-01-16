@@ -18,7 +18,7 @@
 
     .header-options {
         position: absolute;
-        right: 72px;
+        right: 39px;
         top: 28px;
         color: #fff;
         display: flex;
@@ -57,6 +57,93 @@
             line-height: normal;
             font-size: 26px;
             color: #21D2F9;
+        }
+
+        .close {
+            display: none;
+            margin-top: -36px;
+            margin-right: -45px;
+        }
+    }
+
+    .modal-body {
+        padding-right: 0;
+
+        .row {
+            .w-192 {
+                min-width: 192px;
+                margin-right: 18px;
+            }
+
+            .w-402 {
+                min-width: 402px;
+                margin-right: 18px;
+            }
+
+            .w-822 {
+                min-width: 822px;
+                margin-right: 18px;
+            }
+
+            .job-field {
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                label {
+                    font-family: Open Sans;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: normal;
+                    font-size: 14px;
+                    color: #FFFFFF;
+                }
+
+                p {
+                    font-family: Open Sans;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: normal;
+                    font-size: 18px;
+                    color: #E6E6E6;
+                    background: none;
+                    border: none;
+                    padding-bottom: 9px;
+                    border-bottom: 4px solid #D8D7E1;
+                }
+
+                #trucks {
+                    display: flex;
+                    font-family: Open Sans;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: normal;
+                    font-size: 18px;
+                    color: #E6E6E6;
+                    background: none;
+                    border: none;
+                    padding-bottom: 9px;
+                    border-bottom: 4px solid #D8D7E1;
+
+                    .job-number {
+                        margin: 0 5px;
+                        font-family: Open Sans;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        font-size: 11px;
+                        text-align: center;
+                        color: #FFF;
+                        background: #2FB5D2;
+                        border-radius: 4px;
+                        width: 35px;
+                        height: 18px;
+                        float: left;
+                        border: 1px solid #2FB5D2;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
     }
 }
