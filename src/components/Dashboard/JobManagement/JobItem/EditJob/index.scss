@@ -43,6 +43,13 @@
             padding-right: 8px;
             line-height: 13px;
             cursor: pointer;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                 supported by Chrome and Opera */
         }
     }
 
@@ -154,6 +161,32 @@
                         cursor: pointer;
                     }
                 }
+            }
+        }
+    }
+
+    .options-dropdown {
+        position: absolute;
+        width: 157px;
+        height: 117px;
+        background: #1D1D1D;
+        box-shadow: 3px 4px 34px #0E0E0E;
+        right: 39px;
+        top: 52px;
+        padding: 18px 16px;
+
+        .options-item {
+            margin-bottom: 6px;
+            font-family: Open Sans;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            font-size: 14px;
+            color: #FFFFFF;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
             }
         }
     }

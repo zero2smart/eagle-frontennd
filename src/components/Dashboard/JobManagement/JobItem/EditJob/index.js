@@ -1,12 +1,55 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Label, Input, Form, FormGroup } from 'reactstrap';
+import {
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Container,
+    Row,
+    Col,
+    Label,
+    Input,
+    Form,
+    FormGroup,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
+} from 'reactstrap';
 import MapContainer from './MapContainer';
 
 class EditJob extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            optionsOpen: false
+        };
+
+        // this.toggleOptions = this.toggleOptions.bind(this);
+    }
+
+    toggleOptions = () => {
+        this.setState(prevState => ({
+            optionsOpen: !prevState.optionsOpen
+        }));
+    }
+
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    handleClickOutside = (event) => {
+        if (this.state.optionsOpen && this.optionsRef && !this.optionsRef.contains(event.target)) {
+            this.toggleOptions();
+        }
     }
 
     render() {
@@ -15,7 +58,7 @@ class EditJob extends Component {
                 <div className="left-bar"></div>
                 <div className="header-options">
                     <div className="rectangle"></div>
-                    <div className="hamburger">...</div>
+                    <div className="hamburger" onClick={this.toggleOptions}>...</div>
                 </div>
                 <ModalHeader toggle={this.props.openEditJobDialog}>
                     1235
@@ -69,6 +112,17 @@ class EditJob extends Component {
                         <MapContainer />
                     </Row>
                 </ModalBody>
+                <div className={`${this.state.optionsOpen ? 'options-dropdown' : 'd-none'}`} ref={node => this.optionsRef = node}>
+                    <p className="options-item">
+                        View Order
+                    </p>
+                    <p className="options-item">
+                        Edit Order
+                    </p>
+                    <p className="options-item">
+                        Cancel Order
+                    </p>
+                </div>
             </Modal>
         );
     }
