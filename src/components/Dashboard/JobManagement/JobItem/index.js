@@ -79,7 +79,7 @@ class JobItem extends Component {
                             <td>{this.props.job.haul_rate}</td>
                             <td>
                                 <div className="job-list">
-                                    <div>
+                                    <div className="add-trucks">
                                         {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
                                         {!this.state.showTruckList ?
                                             <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
@@ -128,7 +128,7 @@ class JobItem extends Component {
             return (
                 this.props.job.status === "completed" ?
                     <React.Fragment>
-                        <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`} style={this.props.style}>
+                        <tr>
                             <th scope="row" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
@@ -139,7 +139,7 @@ class JobItem extends Component {
                             <td>{this.props.job.haul_rate}</td>
                             <td>
                                 <div className="job-list">
-                                    <div>
+                                    <div className="add-trucks">
                                         {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
                                         <img src={faPlusDisabled} className="fa-my-plus-square-disabled" alt="Plus Square Disabled" width={20} height={20} />
                                     </div>

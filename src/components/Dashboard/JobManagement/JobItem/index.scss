@@ -100,10 +100,15 @@ tr {
             display: flex;
             align-items: center;
 
+            .add-trucks {
+                flex: auto;
+            }
+
             .job-item {
                 display: flex;
                 align-items: center;
                 flex-wrap: wrap;
+                justify-content: flex-end;
 
                 .job-number {
                     margin: 0 5px;
