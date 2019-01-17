@@ -61,25 +61,25 @@ class EditJob extends Component {
                     <div className="hamburger" onClick={this.toggleOptions}>...</div>
                 </div>
                 <ModalHeader toggle={this.props.openEditJobDialog}>
-                    1235
+                    {this.props.job.job_id}
                 </ModalHeader>
                 <ModalBody>
                     <Row>
                         <div className="job-field w-192">
                             <label for="customerName">Customer Name</label>
-                            <p name="customerName" id="customerName">Eagle / Persant</p>
+                            <p name="customerName" id="customerName">{this.props.job.customer_name}</p>
                         </div>
                         <div className="job-field w-192">
                             <label for="quarryCodeName">Quarry Code Name</label>
-                            <p name="quarryCodeName" id="quarryCodeName">7500 SW 23rd ST.</p>
+                            <p name="quarryCodeName" id="quarryCodeName">{this.props.job.quarry_name}</p>
                         </div>
                         <div className="job-field w-192">
-                            <label for="customerName">Material</label>
-                            <p name="material" id="material">Blended Fill</p>
+                            <label for="material">Material</label>
+                            <p name="material" id="material">{this.props.job.material}</p>
                         </div>
                         <div className="job-field w-192">
-                            <label for="customerName">Job Name</label>
-                            <p name="jobName" id="jobName">Wawa Station 18-9312TDASDASD</p>
+                            <label for="jobName">Job Name</label>
+                            <p name="jobName" id="jobName">{this.props.job.job_site}</p>
                         </div>
                     </Row>
                     <Row>
@@ -93,7 +93,7 @@ class EditJob extends Component {
                         </div>
                         <div className="job-field w-192">
                             <label for="truckRate">Truck Rate</label>
-                            <p name="truckRate" id="truckRate">Truck Rate</p>
+                            <p name="truckRate" id="truckRate">{this.props.job.haul_rate}</p>
                         </div>
                     </Row>
                     <Row>
@@ -131,7 +131,8 @@ class EditJob extends Component {
 EditJob.propTypes = {
     modal: PropTypes.bool.isRequired,
     openEditJobDialog: PropTypes.func.isRequired,
-    trucks: PropTypes.array.isRequired
+    trucks: PropTypes.array.isRequired,
+    job: PropTypes.object.isRequired
 };
 
 export default EditJob;
