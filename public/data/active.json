@@ -7,7 +7,8 @@
         "customer_name": "Ozinga",
         "job_site": "2551 SW 13TH",
         "haul_rate": 5.3,
-        "quantity": "60-70 Loads"
+        "quantity": "60-70 Loads",
+        "status": "active"
     },
     {
         "job_id": 3462,
@@ -17,7 +18,8 @@
         "customer_name": "S. Dade Landfill",
         "job_site": "1200 SW 145 AVE",
         "haul_rate": 3.4,
-        "quantity": "22 Loads"
+        "quantity": "22 Loads",
+        "status": "active"
     },
     {
         "job_id": 3478,
@@ -27,7 +29,8 @@
         "customer_name": "Paradise Gardens",
         "job_site": "2551 SW 13TH AVE RD 4 PLACE 2",
         "haul_rate": 4.4,
-        "quantity": "15 Loads"
+        "quantity": "15 Loads",
+        "status": "active"
     },
     {
         "job_id": 1964,
@@ -37,6 +40,7 @@
         "customer_name": "Big Apple Transfer",
         "job_site": "3900 NW 79 AVE",
         "haul_rate": 3.8,
-        "quantity": "20 Loads"
+        "quantity": "20 Loads",
+        "status": "active"
     }
 ]
