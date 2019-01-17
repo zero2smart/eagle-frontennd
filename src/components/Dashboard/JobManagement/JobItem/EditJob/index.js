@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Label, Input, Form, FormGroup } from 'reactstrap';
+import MapContainer from './MapContainer';
 
 class EditJob extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class EditJob extends Component {
                         </div>
                         <div className="job-field w-192">
                             <label for="customerName">Job Name</label>
-                            <p name="jobName" id="jobName">Wawa Station 18-9312T</p>
+                            <p name="jobName" id="jobName">Wawa Station 18-9312TDASDASD</p>
                         </div>
                     </Row>
                     <Row>
@@ -64,11 +65,10 @@ class EditJob extends Component {
                             </div>
                         </div>
                     </Row>
+                    <Row className="map-container">
+                        <MapContainer />
+                    </Row>
                 </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={this.props.openEditJobDialog}>Do Something</Button>{' '}
-                    <Button color="secondary" onClick={this.props.openEditJobDialog}>Cancel</Button>
-                </ModalFooter>
             </Modal>
         );
     }

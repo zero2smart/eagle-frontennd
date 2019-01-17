@@ -68,21 +68,31 @@
 
     .modal-body {
         padding-right: 0;
+        .map-container {
+            height: 375px;
+            margin-bottom: 220px;
+        }
 
         .row {
             .w-192 {
-                min-width: 192px;
+                width: 192px;
                 margin-right: 18px;
+                overflow: hidden;
+                white-space: nowrap;
             }
 
             .w-402 {
-                min-width: 402px;
+                width: 402px;
                 margin-right: 18px;
+                overflow: hidden;
+                white-space: nowrap;
             }
 
             .w-822 {
-                min-width: 822px;
+                width: 822px;
                 margin-right: 18px;
+                overflow: hidden;
+                white-space: nowrap;
             }
 
             .job-field {
@@ -97,6 +107,7 @@
                     line-height: normal;
                     font-size: 14px;
                     color: #FFFFFF;
+                    display: block;
                 }
 
                 p {
