@@ -129,10 +129,17 @@ tr {
 
         .fa-my-plus-square {
             color: #5BBE38;
-            background-color: #FFFFFF;
+            background-color: #282828;
             border-radius: 4px;
             font-size: 20px;
             cursor: pointer;
+        }
+
+        .fa-my-plus-square-disabled {
+            color: #5BBE38;
+            background-color: #282828;
+            border-radius: 4px;
+            font-size: 20px;
         }
 
         .fa-my-minus-square {

@@ -5,7 +5,6 @@ import JobItem from './JobItem';
 import { getJobsAction } from '../../../actions';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
-import { ACTIVE_TAB, COMPLETED_TAB } from '../../../constants';
 
 class JobManagement extends Component {
     constructor(props) {
@@ -33,33 +32,26 @@ class JobManagement extends Component {
     render() {
         let jts = this.state.jobToggleStatus;
 
-        if (this.props.status === ACTIVE_TAB) {
-            return (
-                <div className="job-management-container">
-                    <Table>
-                        <tbody>
-                            {
-                                this.props.jobs.map((job, i) => {
-                                    let isAllMinus = true;
+        return (
+            <div className="job-management-container">
+                <Table>
+                    <tbody>
+                        {
+                            this.props.jobs.map((job, i) => {
+                                let isAllMinus = true;
 
-                                    for (let j = 0; j < jts.length; j++) {
-                                        if (jts[j] === true) {
-                                            isAllMinus = false;
-                                            break;
-                                        }
+                                for (let j = 0; j < jts.length; j++) {
+                                    if (jts[j] === true) {
+                                        isAllMinus = false;
+                                        break;
                                     }
-                                    return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? { opacity: 1 } : {}} applyToggleStatus={this.applyToggleStatus} />;
-                                })}
-                        </tbody>
-                    </Table>
-                </div>
-            );
-        } else if (this.props.status === COMPLETED_TAB) {
-            return (
-                <div className="job-management-container">
-                </div>
-            );
-        }
+                                }
+                                return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? { opacity: 1 } : {}} applyToggleStatus={this.applyToggleStatus} status={this.props.status} />;
+                            })}
+                    </tbody>
+                </Table>
+            </div>
+        );
     }
 }
 
