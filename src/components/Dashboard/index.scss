@@ -8,6 +8,8 @@
     .tab-block {
         display: flex;
         padding-right: 20px;
+        background: #1D1D1D;
+        box-shadow: 3px 4px 34px #0E0E0E;
 
         .tab-block__left {
             flex: auto;
@@ -23,6 +25,7 @@
                 text-align: center;
                 color: #646464;
                 display: inline-block;
+
                 padding: 17px 0;
                 cursor: pointer;
             }

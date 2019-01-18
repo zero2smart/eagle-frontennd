@@ -25,7 +25,7 @@ class Header extends Component {
 
     render() {
         return (
-            <div className="d-flex">
+            <div className="d-flex header-container">
                 <header className="d-flex">
                     <div className="header-left-block">
                         <FontAwesomeIcon className="fa-my-bars" color="#E3E3E3" icon={faBars} onClick={this.toggleSideBar} />

@@ -69,7 +69,7 @@ class JobItem extends Component {
                 this.props.job.status === "active" ?
                     <React.Fragment>
                         <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`} style={this.props.style}>
-                            <th scope="row" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
+                            <th scope="active" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
                             <td>{this.props.job.material}</td>
@@ -129,7 +129,7 @@ class JobItem extends Component {
                 this.props.job.status === "completed" ?
                     <React.Fragment>
                         <tr>
-                            <th scope="row" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
+                            <th scope="completed" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
                             <td>{this.props.job.material}</td>
