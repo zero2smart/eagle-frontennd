@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./index.scss";
 import JobManagement from './JobManagement';
 import { ACTIVE_TAB, COMPLETED_TAB } from '../../constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -33,6 +35,13 @@ class Dashboard extends Component {
                     <div className="tab-block__left">
                         <span style={this.state.activeTab === ACTIVE_TAB ? activeStyle : inActiveStyle} onClick={e => this.switchTab(e, ACTIVE_TAB)}>Active</span>
                         <span style={this.state.activeTab === COMPLETED_TAB ? activeStyle : inActiveStyle} onClick={e => this.switchTab(e, COMPLETED_TAB)}>Completed</span>
+                    </div>
+                    <div className="tab-block__middle">
+                        <span>Date Range:&nbsp;</span>
+                        <span id="date">Select</span>
+                        <span className="down-arrow">
+                            <FontAwesomeIcon className="fa-my-down" color="#ffffff" icon={faChevronDown} onClick={this.toggleCalendar} />
+                        </span>
                     </div>
                     <div className="tab-block__right">
                         <input type="text" placeholder="Search" />
