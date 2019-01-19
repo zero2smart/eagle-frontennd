@@ -4,20 +4,33 @@ import JobManagement from './JobManagement';
 import { ACTIVE_TAB, COMPLETED_TAB } from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { Calendar } from 'react-date-range';
+import { DateRange } from 'react-date-range';
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            activeTab: ACTIVE_TAB
+            activeTab: ACTIVE_TAB,
+            openCalendar: false
         };
 
         this.switchTab = this.switchTab.bind(this);
+        this.toggleCalendar = this.toggleCalendar.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     switchTab(e, status) {
         this.setState({ activeTab: status });
+    }
+
+    toggleCalendar() {
+        this.setState( { openCalendar: !this.state.openCalendar });
+    }
+
+    handleSelect(range) {
+        console.log(range); // Momentjs object
     }
 
     render() {
@@ -50,6 +63,11 @@ class Dashboard extends Component {
                 <div className="job-list-block">
                     <JobManagement status={this.state.activeTab} />
                 </div>
+                {this.state.openCalendar &&
+                    <div className="calendar"><DateRange
+                        onInit={this.handleSelect}
+                        onChange={this.handleSelect}
+                    /></div>}
             </div>
         );
     }

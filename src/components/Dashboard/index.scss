@@ -4,6 +4,7 @@
     background: #1E1E1E;
     display: flex;
     flex-direction: column;
+    position: relative;
 
     .tab-block {
         display: flex;
@@ -101,5 +102,21 @@
 
     .job-list-block {
         padding: 24px;
+    }
+
+    .calendar {
+        position: absolute;
+        left: 35%;
+        top: 50px;
+
+        .rdr-DateRange {
+            background: #1D1D1D !important;
+
+            .rdr-Calendar {
+                background: #1D1D1D !important;
+                box-shadow: 3px 4px 34px #0E0E0E !important;
+                border-radius: 8px !important;
+            }
+        }
     }
 }
