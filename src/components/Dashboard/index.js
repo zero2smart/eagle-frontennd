@@ -49,13 +49,13 @@ class Dashboard extends Component {
                         <span style={this.state.activeTab === ACTIVE_TAB ? activeStyle : inActiveStyle} onClick={e => this.switchTab(e, ACTIVE_TAB)}>Active</span>
                         <span style={this.state.activeTab === COMPLETED_TAB ? activeStyle : inActiveStyle} onClick={e => this.switchTab(e, COMPLETED_TAB)}>Completed</span>
                     </div>
-                    <div className="tab-block__middle">
+                    {this.state.activeTab === COMPLETED_TAB && <div className="tab-block__middle">
                         <span>Date Range:&nbsp;</span>
                         <span id="date">Select</span>
                         <span className="down-arrow">
                             <FontAwesomeIcon className="fa-my-down" color="#ffffff" icon={faChevronDown} onClick={this.toggleCalendar} />
                         </span>
-                    </div>
+                    </div>}
                     <div className="tab-block__right">
                         <input type="text" placeholder="Search" />
                     </div>
