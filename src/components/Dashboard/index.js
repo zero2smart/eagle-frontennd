@@ -4,8 +4,7 @@ import JobManagement from './JobManagement';
 import { ACTIVE_TAB, COMPLETED_TAB } from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { Calendar } from 'react-date-range';
-import { DateRange } from 'react-date-range';
+import { DateRange, Calendar } from 'react-date-range';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -26,11 +25,37 @@ class Dashboard extends Component {
     }
 
     toggleCalendar() {
-        this.setState( { openCalendar: !this.state.openCalendar });
+        this.setState( { openCalendar: !this.state.openCalendar }, () => {
+            if (this.state.openCalendar === true) {
+                let prevButton = document.getElementsByClassName('rdr-MonthAndYear-button prev');
+
+                for (let property in prevButton) {
+                    if (prevButton.hasOwnProperty(property)) {
+                        prevButton[property].innerHTML = "";
+                    }
+                }
+
+                let nextButton = document.getElementsByClassName('rdr-MonthAndYear-button next');
+
+                for (let property in nextButton) {
+                    if (nextButton.hasOwnProperty(property)) {
+                        nextButton[property].innerHTML = "";
+                    }
+                }
+            }
+        });
     }
 
     handleSelect(range) {
         console.log(range); // Momentjs object
+    }
+
+    createElementFromHTML(htmlString) {
+        let div = document.createElement('div');
+        div.innerHTML = htmlString.trim();
+
+        // Change this to div.childNodes to support multiple top-level nodes
+        return div.firstChild;
     }
 
     render() {
@@ -51,7 +76,7 @@ class Dashboard extends Component {
                     </div>
                     {this.state.activeTab === COMPLETED_TAB && <div className="tab-block__middle">
                         <span>Date Range:&nbsp;</span>
-                        <span id="date">Select</span>
+                        <span id="date" onClick={this.toggleCalendar}>Select</span>
                         <span className="down-arrow">
                             <FontAwesomeIcon className="fa-my-down" color="#ffffff" icon={faChevronDown} onClick={this.toggleCalendar} />
                         </span>
