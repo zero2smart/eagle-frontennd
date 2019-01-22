@@ -175,7 +175,7 @@ JobItem.propTypes = {
     changeJobToggleStatus: PropTypes.func.isRequired,
     applyToggleStatus: PropTypes.func.isRequired,
     style: PropTypes.object.isRequired,
-    status: PropTypes.string.isRequired
+    status: PropTypes.number.isRequired
 }
 
 const mapStateToProps = state => ({
