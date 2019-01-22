@@ -199,11 +199,25 @@
                     & > span {
                         width: 40px !important;
                         height: 40px !important;
+
+                        &:first-child {
+                            & > span {
+                                border-radius: 8px 0 0 0 !important;
+                            }
+                        }
+
+                        &:last-child {
+                            & > span {
+                                border-radius: 0 0 8px 0 !important;
+                            }
+                        }
+
                         & > span {
                             width: 40px !important;
                             height: 40px !important;
                         }
                     }
+
 
                     .rdr-Day {
                         background: #282828;

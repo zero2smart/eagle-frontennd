@@ -47,7 +47,7 @@ class Dashboard extends Component {
     }
 
     handleSelect(range) {
-        console.log(range); // Momentjs object
+        this.date.innerHTML = range.startDate.format('MM-DD-YYYY') + ' | ' + range.endDate.format('MM-DD-YYYY');
     }
 
     createElementFromHTML(htmlString) {
@@ -76,7 +76,7 @@ class Dashboard extends Component {
                     </div>
                     {this.state.activeTab === COMPLETED_TAB && <div className="tab-block__middle">
                         <span>Date Range:&nbsp;</span>
-                        <span id="date" onClick={this.toggleCalendar}>Select</span>
+                        <span id="date" onClick={this.toggleCalendar} ref={node => this.date = node}>Select</span>
                         <span className="down-arrow">
                             <FontAwesomeIcon className="fa-my-down" color="#ffffff" icon={faChevronDown} onClick={this.toggleCalendar} />
                         </span>
