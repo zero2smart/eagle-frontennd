@@ -89,10 +89,15 @@ class Dashboard extends Component {
                     <JobManagement status={this.state.activeTab} />
                 </div>
                 {this.state.openCalendar &&
-                    <div className="calendar"><DateRange
-                        onInit={this.handleSelect}
-                        onChange={this.handleSelect}
-                    /></div>}
+                    <div className="calendar">
+                        <div className="title">PICK RANGE DATE</div>
+                        <DateRange
+                            onInit={this.handleSelect}
+                            onChange={this.handleSelect}
+                        />
+                        <div className="bottom" />
+                    </div>
+                }
             </div>
         );
     }
