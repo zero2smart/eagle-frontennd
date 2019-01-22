@@ -2,7 +2,7 @@ tr {
     border-bottom: 2px solid #1D1D1D;
     color: #E7E7E7;
 
-    th {
+    th[scope="active"] {
         border-top: 2px solid #1D1D1D !important;
         height: 32px;
         border-radius: 4px;
@@ -25,6 +25,33 @@ tr {
             width: 14px;
             height: 100%;
             background: #646464;
+            border-radius: 4px 0 0 4px;
+        }
+    }
+
+    th[scope="completed"] {
+        border-top: 2px solid #1D1D1D !important;
+        height: 32px;
+        border-radius: 4px;
+        position: relative;
+        padding: 15px 0 !important;
+        line-height: 1px;
+        padding-left: 25px !important;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: normal;
+        color: #21D2F9;
+        width: 72px;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 14px;
+            height: 100%;
+            background:#5BBE38;
             border-radius: 4px 0 0 4px;
         }
     }
@@ -100,10 +127,15 @@ tr {
             display: flex;
             align-items: center;
 
+            .add-trucks {
+                flex: auto;
+            }
+
             .job-item {
                 display: flex;
                 align-items: center;
                 flex-wrap: wrap;
+                justify-content: flex-end;
 
                 .job-number {
                     margin: 0 5px;
@@ -129,10 +161,17 @@ tr {
 
         .fa-my-plus-square {
             color: #5BBE38;
-            background-color: #FFFFFF;
+            background-color: #282828;
             border-radius: 4px;
             font-size: 20px;
             cursor: pointer;
+        }
+
+        .fa-my-plus-square-disabled {
+            color: #5BBE38;
+            background-color: #282828;
+            border-radius: 4px;
+            font-size: 20px;
         }
 
         .fa-my-minus-square {

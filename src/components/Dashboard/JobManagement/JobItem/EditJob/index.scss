@@ -18,7 +18,7 @@
 
     .header-options {
         position: absolute;
-        right: 72px;
+        right: 39px;
         top: 28px;
         color: #fff;
         display: flex;
@@ -43,6 +43,13 @@
             padding-right: 8px;
             line-height: 13px;
             cursor: pointer;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                 supported by Chrome and Opera */
         }
     }
 
@@ -57,6 +64,131 @@
             line-height: normal;
             font-size: 26px;
             color: #21D2F9;
+        }
+
+        .close {
+            display: none;
+            margin-top: -36px;
+            margin-right: -45px;
+        }
+    }
+
+    .modal-body {
+        padding-right: 0;
+        .map-container {
+            height: 375px;
+            margin-bottom: 220px;
+            margin-top: 38px;
+        }
+
+        .row {
+            .w-192 {
+                width: 192px;
+                margin-right: 18px;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            .w-402 {
+                width: 402px;
+                margin-right: 18px;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            .w-822 {
+                width: 822px;
+                margin-right: 18px;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            .job-field {
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                label {
+                    font-family: Open Sans;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: normal;
+                    font-size: 14px;
+                    color: #FFFFFF;
+                    display: block;
+                }
+
+                p {
+                    font-family: Open Sans;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: normal;
+                    font-size: 18px;
+                    color: #E6E6E6;
+                    background: none;
+                    border: none;
+                    padding-bottom: 9px;
+                    border-bottom: 4px solid #D8D7E1;
+                }
+
+                #trucks {
+                    display: flex;
+                    font-family: Open Sans;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: normal;
+                    font-size: 18px;
+                    color: #E6E6E6;
+                    background: none;
+                    border: none;
+                    padding-bottom: 9px;
+                    border-bottom: 4px solid #D8D7E1;
+
+                    .job-number {
+                        margin: 0 5px;
+                        font-family: Open Sans;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        font-size: 11px;
+                        text-align: center;
+                        color: #FFF;
+                        background: #2FB5D2;
+                        border-radius: 4px;
+                        width: 35px;
+                        height: 18px;
+                        float: left;
+                        border: 1px solid #2FB5D2;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    .options-dropdown {
+        position: absolute;
+        width: 157px;
+        height: 117px;
+        background: #1D1D1D;
+        box-shadow: 3px 4px 34px #0E0E0E;
+        right: 39px;
+        top: 52px;
+        padding: 18px 16px;
+
+        .options-item {
+            margin-bottom: 6px;
+            font-family: Open Sans;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            font-size: 14px;
+            color: #FFFFFF;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }

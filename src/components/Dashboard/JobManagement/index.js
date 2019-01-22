@@ -38,16 +38,16 @@ class JobManagement extends Component {
                     <tbody>
                         {
                             this.props.jobs.map((job, i) => {
-                            let isAllMinus = true;
+                                let isAllMinus = true;
 
-                            for (let j = 0; j < jts.length; j++) {
-                                if (jts[j] === true) {
-                                    isAllMinus = false;
-                                    break;
+                                for (let j = 0; j < jts.length; j++) {
+                                    if (jts[j] === true) {
+                                        isAllMinus = false;
+                                        break;
+                                    }
                                 }
-                            }
-                            return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? {opacity: 1} : {}} applyToggleStatus={this.applyToggleStatus} />;
-                        })}
+                                return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? { opacity: 1 } : {}} applyToggleStatus={this.applyToggleStatus} status={this.props.status} />;
+                            })}
                     </tbody>
                 </Table>
             </div>
@@ -57,7 +57,8 @@ class JobManagement extends Component {
 
 JobManagement.propTypes = {
     jobs: PropTypes.array.isRequired,
-    jobToggleStatus: PropTypes.array.isRequired
+    jobToggleStatus: PropTypes.array.isRequired,
+    status: PropTypes.number.isRequired
 }
 
 const mapStateToProps = state => ({
