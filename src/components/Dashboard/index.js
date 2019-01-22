@@ -25,6 +25,8 @@ class Dashboard extends Component {
     }
 
     toggleCalendar() {
+        this.middleRef.style.flex = 2.5;
+
         this.setState( { openCalendar: !this.state.openCalendar }, () => {
             if (this.state.openCalendar === true) {
                 let prevButton = document.getElementsByClassName('rdr-MonthAndYear-button prev');
@@ -74,7 +76,7 @@ class Dashboard extends Component {
                         <span style={this.state.activeTab === ACTIVE_TAB ? activeStyle : inActiveStyle} onClick={e => this.switchTab(e, ACTIVE_TAB)}>Active</span>
                         <span style={this.state.activeTab === COMPLETED_TAB ? activeStyle : inActiveStyle} onClick={e => this.switchTab(e, COMPLETED_TAB)}>Completed</span>
                     </div>
-                    {this.state.activeTab === COMPLETED_TAB && <div className="tab-block__middle">
+                    {this.state.activeTab === COMPLETED_TAB && <div className="tab-block__middle" ref={node => this.middleRef = node}>
                         <span>Date Range:&nbsp;</span>
                         <span id="date" onClick={this.toggleCalendar} ref={node => this.date = node}>Select</span>
                         <span className="down-arrow">
