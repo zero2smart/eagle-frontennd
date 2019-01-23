@@ -7,6 +7,7 @@ export default function* rootSaga() {
     yield all([
         fork(dashboardSaga.watchToggleSideBarAsync),
         fork(dashboardSaga.watchGetJobsAsync),
-        fork(dashboardSaga.watchChangeJobToggleStatusAsync)
+        fork(dashboardSaga.watchChangeJobToggleStatusAsync),
+        fork(dashboardSaga.watchRemoveJobInActiveAsync)
     ]);
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import './index.scss';
 import { connect } from 'react-redux';
-import { changeJobToggleStatusAction } from '../../../../actions';
+import { changeJobToggleStatusAction, removeJobInActiveAction } from '../../../../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import faPlus from '../../../../assets/images/plus-symbol-in-a-rounded-black-square.png';
@@ -34,6 +35,10 @@ class JobItem extends Component {
 
     setJobToComplete() {
         this.setState({ checked: true });
+
+        setTimeout(() => {
+            this.props.removeJobInActive(this.props.job.job_id);
+        }, 300);
     }
 
     openEditJobDialog() {
@@ -179,6 +184,7 @@ JobItem.propTypes = {
     index: PropTypes.number.isRequired,
     jobToggleStatus: PropTypes.array.isRequired,
     changeJobToggleStatus: PropTypes.func.isRequired,
+    removeJobInActive: PropTypes.func.isRequired,
     applyToggleStatus: PropTypes.func.isRequired,
     style: PropTypes.object.isRequired,
     status: PropTypes.number.isRequired
@@ -189,7 +195,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    changeJobToggleStatus: (index, status) => dispatch(changeJobToggleStatusAction({ index: index, status: status }))
+    changeJobToggleStatus: (index, status) => dispatch(changeJobToggleStatusAction({ index: index, status: status })),
+    removeJobInActive: (id) => dispatch(removeJobInActiveAction(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobItem);
