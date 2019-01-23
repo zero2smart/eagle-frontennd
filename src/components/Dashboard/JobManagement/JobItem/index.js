@@ -5,7 +5,7 @@ import './index.scss';
 import { connect } from 'react-redux';
 import { changeJobToggleStatusAction, removeJobInActiveAction } from '../../../../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 import faPlus from '../../../../assets/images/plus-symbol-in-a-rounded-black-square.png';
 import faPlusDisabled from '../../../../assets/images/disabled-plus-symbol-in-a-rounded-black-square.png';
 import faMinus from '../../../../assets/images/minus-sign-inside-a-black-circle.png';
@@ -94,7 +94,7 @@ class JobItem extends Component {
                                         {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
                                         {!this.state.showTruckList ?
                                             <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
-                                            : <img src={faMinus} className="fa-my-minus-square" alt="Minus Square" width={20} height={20} onClick={this.toggleTruckList} />
+                                            : <FontAwesomeIcon className="fa-my-check" icon={faCheck} onClick={this.toggleTruckList} />
                                         }
                                     </div>
                                     <div className="job-item">
@@ -112,7 +112,7 @@ class JobItem extends Component {
                         </tr>
                         <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`} style={this.props.style}>
                             <div className="truck-list">
-                                <div className="threedot">
+                                <div className={`${this.state.jobList.length > 0 ? 'threedot' : ''}`}>
                                     <div></div>
                                     <div></div>
                                     <div></div>
