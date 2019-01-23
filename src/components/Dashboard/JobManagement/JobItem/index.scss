@@ -230,6 +230,32 @@ tr {
                 border: 1px solid #616161;
                 box-sizing: border-box;
                 border-radius: 4px;
+                cursor: pointer;
+                position: relative;
+
+                &.checked {
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: 31%;
+                        top: 50%;
+                        width: 30%;
+                        height: 2px;
+                        background: #5BBE38;
+                        transform: translate(-50%, -50%) rotate(-120deg);
+                    }
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        left: 54%;
+                        top: 50%;
+                        width: 60%;
+                        height: 2px;
+                        background: #5BBE38;
+                        transform: translate(-50%, -50%) rotate(-45deg);
+                    }
+                }
             }
         }
     }

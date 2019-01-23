@@ -19,15 +19,21 @@ class JobItem extends Component {
             showTruckList: false,
             truckStatusList: [],
             jobList: [],
-            modal: false
+            modal: false,
+            checked: false
         };
 
         this.toggleSideBar = this.toggleSideBar.bind(this);
         this.toggleTruckList = this.toggleTruckList.bind(this);
         this.addTruck = this.addTruck.bind(this);
         this.openEditJobDialog = this.openEditJobDialog.bind(this);
+        this.setJobToComplete = this.setJobToComplete.bind(this);
 
         this.truckElements = [];
+    }
+
+    setJobToComplete() {
+        this.setState({ checked: true });
     }
 
     openEditJobDialog() {
@@ -96,7 +102,7 @@ class JobItem extends Component {
                                 </div>
                             </td>
                             <td>
-                                <div></div>
+                                <div onClick={this.setJobToComplete} className={`${this.state.checked ? 'checked' : ''}`}></div>
                             </td>
                         </tr>
                         <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`} style={this.props.style}>
