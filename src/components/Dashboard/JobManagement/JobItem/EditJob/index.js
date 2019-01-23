@@ -67,33 +67,33 @@ class EditJob extends Component {
                     <Row>
                         <div className="job-field w-192">
                             <label for="customerName">Customer Name</label>
-                            <p name="customerName" id="customerName">{this.props.job.customer_name}</p>
+                            <input type="text" name="customerName" id="customerName" value={this.props.job.customer_name} />
                         </div>
                         <div className="job-field w-192">
                             <label for="quarryCodeName">Quarry Code Name</label>
-                            <p name="quarryCodeName" id="quarryCodeName">{this.props.job.quarry_name}</p>
+                            <input type="text" name="quarryCodeName" id="quarryCodeName" value={this.props.job.quarry_name} />
                         </div>
                         <div className="job-field w-192">
                             <label for="material">Material</label>
-                            <p name="material" id="material">{this.props.job.material}</p>
+                            <input type="text" name="material" id="material" value={this.props.job.material} />
                         </div>
                         <div className="job-field w-192">
                             <label for="jobName">Job Name</label>
-                            <p name="jobName" id="jobName">{this.props.job.job_site}</p>
+                            <input type="text" name="jobName" id="jobName" value={this.props.job.job_site} />
                         </div>
                     </Row>
                     <Row>
                         <div className="job-field w-402">
                             <label for="deliveryAddress">Delivery Address</label>
-                            <p name="deliveryAddress" id="deliveryAddress">2551 SW 13TH AVE RD 4 PLACE 2</p>
+                            <input type="text" name="deliveryAddress" id="deliveryAddress" />
                         </div>
                         <div className="job-field w-192">
                             <label for="remarks">Remarks</label>
-                            <p name="remarks" id="remarks">60-70 Loads</p>
+                            <input type="text" name="remarks" id="remarks" value="60-70 Loads" />
                         </div>
                         <div className="job-field w-192">
                             <label for="truckRate">Truck Rate</label>
-                            <p name="truckRate" id="truckRate">{this.props.job.haul_rate}</p>
+                            <input type="text" name="truckRate" id="truckRate" value={this.props.job.haul_rate} />
                         </div>
                     </Row>
                     <Row>

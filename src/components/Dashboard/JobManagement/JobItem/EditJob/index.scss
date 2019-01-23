@@ -82,6 +82,8 @@
         }
 
         .row {
+            margin-bottom: 24px;
+
             .w-192 {
                 width: 192px;
                 margin-right: 18px;
@@ -118,7 +120,7 @@
                     display: block;
                 }
 
-                p {
+                input {
                     font-family: Open Sans;
                     font-style: normal;
                     font-weight: normal;
@@ -143,6 +145,7 @@
                     border: none;
                     padding-bottom: 9px;
                     border-bottom: 4px solid #D8D7E1;
+                    min-height: 31px;
 
                     .job-number {
                         margin: 0 5px;
@@ -160,6 +163,10 @@
                         float: left;
                         border: 1px solid #2FB5D2;
                         cursor: pointer;
+
+                        &:nth-of-type(1) {
+                            margin-left: 0;
+                        }
                     }
                 }
             }
