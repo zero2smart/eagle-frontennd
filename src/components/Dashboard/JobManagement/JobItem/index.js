@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import './index.scss';
 import { connect } from 'react-redux';
-import { changeJobToggleStatusAction, removeJobInActiveAction } from '../../../../actions';
+import {
+    changeJobToggleStatusAction,
+    removeJobInActiveAction,
+    addTruckToListAction,
+    removeTruckFromListAction
+} from '../../../../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 import faPlus from '../../../../assets/images/plus-symbol-in-a-rounded-black-square.png';
@@ -19,7 +24,6 @@ class JobItem extends Component {
         this.state = {
             showTruckList: false,
             truckStatusList: [],
-            jobList: [],
             modal: false,
             checked: false
         };
@@ -27,6 +31,7 @@ class JobItem extends Component {
         this.toggleSideBar = this.toggleSideBar.bind(this);
         this.toggleTruckList = this.toggleTruckList.bind(this);
         this.addTruck = this.addTruck.bind(this);
+        this.removeTruck = this.removeTruck.bind(this);
         this.openEditJobDialog = this.openEditJobDialog.bind(this);
         this.setJobToComplete = this.setJobToComplete.bind(this);
 
@@ -63,15 +68,17 @@ class JobItem extends Component {
     }
 
     addTruck(n, i) {
-        this.truckElements[i].style.color = '#626269';
-        this.truckElements[i].style.borderColor = '#626269';
-        this.setState(prev => {
-            let tmp = prev.jobList;
-            tmp.push(n);
-            return {
-                jobList: tmp
-            };
-        });
+        // this.truckElements[i].style.color = '#626269';
+        // this.truckElements[i].style.borderColor = '#626269';
+
+        this.props.addTruckToList(this.props.job.job_id, n);
+    }
+
+    removeTruck(n, i) {
+        // this.truckElements[i].style.color = '#626269';
+        // this.truckElements[i].style.borderColor = '#626269';
+
+        this.props.removeTruckFromList(this.props.job.job_id, n);
     }
 
     render() {
@@ -80,7 +87,7 @@ class JobItem extends Component {
                 this.props.job.status === "active" ?
                     <React.Fragment>
                         <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`} style={this.props.style}>
-                            <th scope="active" className={`${this.state.jobList.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
+                            <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
                             <td>{this.props.job.material}</td>
@@ -98,8 +105,8 @@ class JobItem extends Component {
                                         }
                                     </div>
                                     <div className="job-item">
-                                        {this.state.jobList.map((n, i) => (
-                                            <div className="job-number" key={i}>
+                                        {this.props.job.dispatched_trucks.map((n, i) => (
+                                            <div className="job-number" onClick={() => this.removeTruck(n, i)} key={i}>
                                                 {n}
                                             </div>
                                         ))}
@@ -112,25 +119,24 @@ class JobItem extends Component {
                         </tr>
                         <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`} style={this.props.style}>
                             <div className="truck-list">
-                                <div className={`${this.state.jobList.length > 0 ? 'threedot' : ''}`}>
+                                <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
                                     <div></div>
                                     <div></div>
                                     <div></div>
                                 </div>
                                 <div className="d-flex-wrap">
-                                    {[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
-                                        121, 122, 123, 124, 125, 126, 127, 128].map((n, i) => (
-                                            <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node} key={i}>
-                                                {n}
-                                            </div>
-                                        ))}
+                                    {this.props.job.trucks.map((n, i) => (
+                                        <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node} key={i}>
+                                            {n}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </tr>
                         <EditJob
                             className="edit-job-modal"
                             modal={this.state.modal}
-                            trucks={this.state.jobList}
+                            trucks={this.props.job.dispatched_trucks}
                             job={this.props.job}
                             openEditJobDialog={this.openEditJobDialog} />
                     </React.Fragment> : null
@@ -155,7 +161,7 @@ class JobItem extends Component {
                                         <img src={faPlusDisabled} className="fa-my-plus-square-disabled" alt="Plus Square Disabled" width={20} height={20} />
                                     </div>
                                     <div className="job-item">
-                                        {this.props.job.trucks.map((n, i) => (
+                                        {this.props.job.dispatched_trucks.map((n, i) => (
                                             <div className="job-number" key={i}>
                                                 {n}
                                             </div>
@@ -170,7 +176,7 @@ class JobItem extends Component {
                         <EditJob
                             className="edit-job-modal"
                             modal={this.state.modal}
-                            trucks={this.state.jobList}
+                            trucks={this.props.job.dispatched_trucks}
                             job={this.props.job}
                             openEditJobDialog={this.openEditJobDialog} />
                     </React.Fragment> : null
@@ -185,6 +191,8 @@ JobItem.propTypes = {
     jobToggleStatus: PropTypes.array.isRequired,
     changeJobToggleStatus: PropTypes.func.isRequired,
     removeJobInActive: PropTypes.func.isRequired,
+    addTruckToList: PropTypes.func.isRequired,
+    removeTruckFromList: PropTypes.func.isRequired,
     applyToggleStatus: PropTypes.func.isRequired,
     style: PropTypes.object.isRequired,
     status: PropTypes.number.isRequired
@@ -196,7 +204,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     changeJobToggleStatus: (index, status) => dispatch(changeJobToggleStatusAction({ index: index, status: status })),
-    removeJobInActive: (id) => dispatch(removeJobInActiveAction(id))
+    removeJobInActive: (id) => dispatch(removeJobInActiveAction(id)),
+    addTruckToList: (job_id, number) => dispatch(addTruckToListAction({ job_id: job_id, number: number })),
+    removeTruckFromList: (job_id, number) => dispatch(removeTruckFromListAction({ job_id: job_id, number: number }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobItem);

@@ -9,7 +9,13 @@
         "haul_rate": 5.3,
         "quantity": "60-70 Loads",
         "status": "active",
-        "trucks": []
+        "trucks": [
+            401,
+            402,
+            403,
+            404
+        ],
+        "dispatched_trucks": []
     },
     {
         "job_id": 3462,
@@ -21,7 +27,14 @@
         "haul_rate": 3.4,
         "quantity": "22 Loads",
         "status": "active",
-        "trucks": []
+        "trucks": [
+            301,
+            302,
+            303,
+            304,
+            305
+        ],
+        "dispatched_trucks": []
     },
     {
         "job_id": 3478,
@@ -33,7 +46,14 @@
         "haul_rate": 4.4,
         "quantity": "15 Loads",
         "status": "active",
-        "trucks": []
+        "trucks": [
+            201,
+            202,
+            203,
+            204,
+            205
+        ],
+        "dispatched_trucks": []
     },
     {
         "job_id": 1964,
@@ -45,7 +65,13 @@
         "haul_rate": 3.8,
         "quantity": "20 Loads",
         "status": "active",
-        "trucks": []
+        "trucks": [
+            101,
+            102,
+            103,
+            104
+        ],
+        "dispatched_trucks": []
     },
     {
         "job_id": 1542,
@@ -57,7 +83,8 @@
         "haul_rate": 5.3,
         "quantity": "60-70 Loads",
         "status": "completed",
-        "trucks": [
+        "trucks": [],
+        "dispatched_trucks": [
             101,
             102,
             103,
@@ -76,7 +103,8 @@
         "haul_rate": 3.4,
         "quantity": "22 Loads",
         "status": "completed",
-        "trucks": [
+        "trucks": [],
+        "dispatched_trucks": [
             111,
             114,
             115,
@@ -93,7 +121,8 @@
         "haul_rate": 4.4,
         "quantity": "15 Loads",
         "status": "completed",
-        "trucks": [
+        "trucks": [],
+        "dispatched_trucks": [
             121,
             122,
             123,
@@ -111,7 +140,8 @@
         "haul_rate": 3.8,
         "quantity": "20 Loads",
         "status": "completed",
-        "trucks": [
+        "trucks": [],
+        "dispatched_trucks": [
             131,
             132,
             133,
