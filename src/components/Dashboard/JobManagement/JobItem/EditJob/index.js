@@ -67,33 +67,33 @@ class EditJob extends Component {
                     <Row>
                         <div className="job-field w-192">
                             <label for="customerName">Customer Name</label>
-                            <input type="text" name="customerName" id="customerName" value={this.props.job.customer_name} />
+                            <input type="text" name="customerName" id="customerName" defaultValue={this.props.job.customer_name} />
                         </div>
                         <div className="job-field w-192">
                             <label for="quarryCodeName">Quarry Code Name</label>
-                            <input type="text" name="quarryCodeName" id="quarryCodeName" value={this.props.job.quarry_name} />
+                            <input type="text" name="quarryCodeName" id="quarryCodeName" defaultValue={this.props.job.quarry_name} />
                         </div>
                         <div className="job-field w-192">
                             <label for="material">Material</label>
-                            <input type="text" name="material" id="material" value={this.props.job.material} />
+                            <input type="text" name="material" id="material" defaultValue={this.props.job.material} />
                         </div>
                         <div className="job-field w-192">
                             <label for="jobName">Job Name</label>
-                            <input type="text" name="jobName" id="jobName" value={this.props.job.job_site} />
+                            <input type="text" name="jobName" id="jobName" defaultValue={this.props.job.job_site} />
                         </div>
                     </Row>
                     <Row>
                         <div className="job-field w-402">
                             <label for="deliveryAddress">Delivery Address</label>
-                            <input type="text" name="deliveryAddress" id="deliveryAddress" />
+                            <input type="text" name="deliveryAddress" id="deliveryAddress" defaultValue="2551 SW 13TH AVE RD 4 PLACE 2" />
                         </div>
                         <div className="job-field w-192">
                             <label for="remarks">Remarks</label>
-                            <input type="text" name="remarks" id="remarks" value="60-70 Loads" />
+                            <input type="text" name="remarks" id="remarks" defaultValue="60-70 Loads" />
                         </div>
                         <div className="job-field w-192">
                             <label for="truckRate">Truck Rate</label>
-                            <input type="text" name="truckRate" id="truckRate" value={this.props.job.haul_rate} />
+                            <input type="text" name="truckRate" id="truckRate" defaultValue={this.props.job.haul_rate} />
                         </div>
                     </Row>
                     <Row>
