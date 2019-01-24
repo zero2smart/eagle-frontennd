@@ -5,6 +5,8 @@ import { ACTIVE_TAB, COMPLETED_TAB } from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { DateRange, Calendar } from 'react-date-range';
+import { connect } from 'react-redux';
+import { orderListAction } from '../../actions';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -88,7 +90,7 @@ class Dashboard extends Component {
                     </div>
                 </div>
                 <div className="job-list-block">
-                    <JobManagement status={this.state.activeTab} />
+                    <JobManagement distance={2} status={this.state.activeTab} axis="xy" onSortEnd={this.props.onSortEnd} />
                 </div>
                 {this.state.openCalendar &&
                     <div className="calendar">
@@ -105,4 +107,8 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+const mapDispatchToProps = dispatch => ({
+    onSortEnd: ({ oldIndex, newIndex }) => dispatch(orderListAction({ oldIndex, newIndex }))
+});
+
+export default connect(null, mapDispatchToProps)(Dashboard);

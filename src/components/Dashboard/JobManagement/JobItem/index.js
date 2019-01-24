@@ -16,6 +16,11 @@ import faPlusDisabled from '../../../../assets/images/disabled-plus-symbol-in-a-
 import faMinus from '../../../../assets/images/minus-sign-inside-a-black-circle.png';
 import EditJob from './EditJob';
 import { ACTIVE_TAB, COMPLETED_TAB } from '../../../../constants';
+import {
+    SortableContainer,
+    SortableElement,
+    arrayMove,
+} from 'react-sortable-hoc';
 
 class JobItem extends Component {
     constructor(props) {
@@ -139,7 +144,7 @@ class JobItem extends Component {
                             trucks={this.props.job.dispatched_trucks}
                             job={this.props.job}
                             openEditJobDialog={this.openEditJobDialog} />
-                    </React.Fragment> : null
+                    </React.Fragment> : <tr />
             );
         } else if (this.props.status === COMPLETED_TAB) {
             return (
@@ -179,7 +184,7 @@ class JobItem extends Component {
                             trucks={this.props.job.dispatched_trucks}
                             job={this.props.job}
                             openEditJobDialog={this.openEditJobDialog} />
-                    </React.Fragment> : null
+                    </React.Fragment> : <tr />
             );
         }
     }
@@ -198,6 +203,10 @@ JobItem.propTypes = {
     status: PropTypes.number.isRequired
 }
 
+JobItem.defaultProps = {
+    index: 0
+}
+
 const mapStateToProps = state => ({
     jobToggleStatus: state.dashboard.jobToggleStatus
 });
@@ -209,4 +218,4 @@ const mapDispatchToProps = dispatch => ({
     removeTruckFromList: (job_id, number) => dispatch(removeTruckFromListAction({ job_id: job_id, number: number }))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobItem);
+export default connect(mapStateToProps, mapDispatchToProps)(SortableElement(JobItem));

@@ -5,8 +5,10 @@ import {
     CHANGE_JOB_TOGGLE_STATUS_SUCCEEDED,
     REMOVE_JOB_IN_ACTIVE_SUCCEEDED,
     ADD_TRUCK_TO_LIST_SUCCEEDED,
-    REMOVE_TRUCK_FROM_LIST_SUCCEEDED
+    REMOVE_TRUCK_FROM_LIST_SUCCEEDED,
+    ORDER_LIST_SUCCEEDED
 } from '../constants';
+import { arrayMove } from 'react-sortable-hoc';
 
 const initialState = {
     showSideBar: false,
@@ -76,6 +78,14 @@ const dashboardReducer = handleActions(
                 ...state,
                 jobs: tmp
             }
+        },
+        [ORDER_LIST_SUCCEEDED]: (state, action) => {
+            debugger;
+            return {
+                ...state,
+                jobs: arrayMove(state.jobs, action.payload.oldIndex, action.payload.newIndex),
+                jobToggleStatus: arrayMove(state.jobToggleStatus, action.payload.oldIndex, action.payload.newIndex)
+            };
         }
     },
     initialState

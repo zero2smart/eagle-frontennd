@@ -5,6 +5,11 @@ import JobItem from './JobItem';
 import { getJobsAction } from '../../../actions';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
+import {
+    SortableContainer,
+    SortableElement,
+    arrayMove,
+} from 'react-sortable-hoc';
 
 class JobManagement extends Component {
     constructor(props) {
@@ -46,8 +51,16 @@ class JobManagement extends Component {
                                         break;
                                     }
                                 }
-                                return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? { opacity: 1 } : {}} applyToggleStatus={this.applyToggleStatus} status={this.props.status} />;
-                            })}
+
+                                return <JobItem
+                                        key={job.job_id}
+                                        job={job}
+                                        index={i}
+                                        style={isAllMinus ? { opacity: 1 } : {}}
+                                        applyToggleStatus={this.applyToggleStatus}
+                                        status={this.props.status} />;
+                            })
+                        }
                     </tbody>
                 </Table>
             </div>
@@ -70,4 +83,4 @@ const mapDispatchToProps = dispatch => ({
     getJobsAction: () => dispatch(getJobsAction())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobManagement);
+export default connect(mapStateToProps, mapDispatchToProps)(SortableContainer(JobManagement));
