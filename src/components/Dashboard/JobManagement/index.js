@@ -26,8 +26,9 @@ class JobManagement extends Component {
         this.props.getJobsAction();
     }
 
-    componentDidUpdate(prevProps, prevState) {
-
+    shouldComponentUpdate(prevProps, prevState) {
+        console.log(prevState);
+        return true;
     }
 
     applyToggleStatus(jts) {
@@ -36,6 +37,10 @@ class JobManagement extends Component {
 
     render() {
         let jts = this.state.jobToggleStatus;
+        let dd = {
+            opacity: 1 + ' !important',
+            zIndex: 100
+        };
 
         return (
             <div className="job-management-container">
@@ -52,11 +57,14 @@ class JobManagement extends Component {
                                     }
                                 }
 
+                                console.log(isAllMinus);
+
                                 return <JobItem
                                         key={job.job_id}
                                         job={job}
                                         index={i}
-                                        style={isAllMinus ? { opacity: 1 } : {}}
+                                        idx={i}
+                                        className={isAllMinus ? 'o-100' : ''}
                                         applyToggleStatus={this.applyToggleStatus}
                                         status={this.props.status} />;
                             })

@@ -103,6 +103,10 @@
 
     .job-list-block {
         padding: 24px;
+
+        .sort {
+            z-index: 10000 !important;
+        }
     }
 
     .calendar {

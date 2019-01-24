@@ -90,7 +90,7 @@ class Dashboard extends Component {
                     </div>
                 </div>
                 <div className="job-list-block">
-                    <JobManagement distance={2} status={this.state.activeTab} axis="xy" onSortEnd={this.props.onSortEnd} />
+                    <JobManagement distance={2} status={this.state.activeTab} axis="xy" onSortEnd={this.props.onSortEnd} helperClass="sort" />
                 </div>
                 {this.state.openCalendar &&
                     <div className="calendar">

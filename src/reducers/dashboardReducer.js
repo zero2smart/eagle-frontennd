@@ -80,7 +80,6 @@ const dashboardReducer = handleActions(
             }
         },
         [ORDER_LIST_SUCCEEDED]: (state, action) => {
-            debugger;
             return {
                 ...state,
                 jobs: arrayMove(state.jobs, action.payload.oldIndex, action.payload.newIndex),

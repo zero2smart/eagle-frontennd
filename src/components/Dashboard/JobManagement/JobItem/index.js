@@ -63,13 +63,13 @@ class JobItem extends Component {
 
     toggleTruckList() {
         this.setState({ showTruckList: !this.state.showTruckList }, () => {
-            this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
+            this.props.changeJobToggleStatus(this.props.idx, this.state.showTruckList);
             this.props.applyToggleStatus(this.props.jobToggleStatus);
         });
     }
 
     componentDidMount() {
-        this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
+        this.props.changeJobToggleStatus(this.props.idx, this.state.showTruckList);
     }
 
     addTruck(n, i) {
@@ -91,7 +91,7 @@ class JobItem extends Component {
             return (
                 this.props.job.status === "active" ?
                     <React.Fragment>
-                        <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`} style={this.props.style}>
+                        <tr className={`${!this.state.showTruckList ? 'o-30' : ''} ${this.props.className}`}>
                             <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
@@ -192,19 +192,15 @@ class JobItem extends Component {
 
 JobItem.propTypes = {
     job: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired,
+    idx: PropTypes.number.isRequired,
     jobToggleStatus: PropTypes.array.isRequired,
     changeJobToggleStatus: PropTypes.func.isRequired,
     removeJobInActive: PropTypes.func.isRequired,
     addTruckToList: PropTypes.func.isRequired,
     removeTruckFromList: PropTypes.func.isRequired,
     applyToggleStatus: PropTypes.func.isRequired,
-    style: PropTypes.object.isRequired,
+    className: PropTypes.string.isRequired,
     status: PropTypes.number.isRequired
-}
-
-JobItem.defaultProps = {
-    index: 0
 }
 
 const mapStateToProps = state => ({
