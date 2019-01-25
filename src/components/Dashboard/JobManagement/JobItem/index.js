@@ -150,7 +150,7 @@ class JobItem extends Component {
             return (
                 this.props.job.status === "completed" ?
                     <React.Fragment>
-                        <tr>
+                        <tr className={`${this.props.className}`}>
                             <th scope="completed" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
