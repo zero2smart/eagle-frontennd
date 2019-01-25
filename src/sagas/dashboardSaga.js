@@ -23,7 +23,10 @@ import {
     ORDER_LIST_FAILED,
     UPDATE_JOB,
     UPDATE_JOB_SUCCEEDED,
-    UPDATE_JOB_FAILED
+    UPDATE_JOB_FAILED,
+    SWITCH_TAB,
+    SWITCH_TAB_SUCCEEDED,
+    SWITCH_TAB_FAILED
 } from '../constants';
 import JobService from '../api/JobService';
 
@@ -92,6 +95,14 @@ function* updateJobAsync(action) {
     }
 }
 
+function* switchTabAsync(action) {
+    try {
+        yield put({ type: SWITCH_TAB_SUCCEEDED, payload: action.payload });
+    } catch (e) {
+        yield put({ type: SWITCH_TAB_FAILED, message: e.message });
+    }
+}
+
 export function* watchToggleSideBarAsync() {
     yield takeEvery(TOGGLE_SIDEBAR, toggleSideBarAsync);
 }
@@ -122,4 +133,8 @@ export function* watchOrderListAsync() {
 
 export function* watchUpdateJobAsync() {
     yield takeEvery(UPDATE_JOB, updateJobAsync);
+}
+
+export function* watchSwitchTabAsync() {
+    yield takeEvery(SWITCH_TAB, switchTabAsync);
 }

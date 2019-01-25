@@ -203,6 +203,10 @@ JobItem.propTypes = {
     status: PropTypes.number.isRequired
 }
 
+JobItem.defaultProps = {
+    status: ACTIVE_TAB
+}
+
 const mapStateToProps = state => ({
     jobToggleStatus: state.dashboard.jobToggleStatus
 });

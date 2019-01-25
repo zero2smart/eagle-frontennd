@@ -7,7 +7,10 @@ import {
     ADD_TRUCK_TO_LIST_SUCCEEDED,
     REMOVE_TRUCK_FROM_LIST_SUCCEEDED,
     ORDER_LIST_SUCCEEDED,
-    UPDATE_JOB_SUCCEEDED
+    UPDATE_JOB_SUCCEEDED,
+    SWITCH_TAB_SUCCEEDED,
+    ACTIVE_TAB,
+    COMPLETED_TAB
 } from '../constants';
 import { arrayMove } from 'react-sortable-hoc';
 
@@ -15,7 +18,8 @@ const initialState = {
     showSideBar: false,
     jobs: [],
     jobToggleStatus: [],
-    errors: {}
+    errors: {},
+    tabStatus: ACTIVE_TAB
 };
 
 const dashboardReducer = handleActions(
@@ -106,7 +110,11 @@ const dashboardReducer = handleActions(
                 ...state,
                 jobs: tmp
             }
-        }
+        },
+        [SWITCH_TAB_SUCCEEDED]: (state, action) => ({
+            ...state,
+            tabStatus: action.payload
+        })
     },
     initialState
 );

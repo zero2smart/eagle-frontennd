@@ -78,12 +78,16 @@ JobManagement.propTypes = {
     jobs: PropTypes.array.isRequired,
     jobToggleStatus: PropTypes.array.isRequired,
     status: PropTypes.number.isRequired,
-    searchTerm: PropTypes.string.isRequired
+    searchTerm: PropTypes.string.isRequired,
+    startDate: PropTypes.object.isRequired,
+    endDate: PropTypes.object.isRequired,
+    tabStatus: PropTypes.number.isRequired
 }
 
 const mapStateToProps = state => ({
     jobs: state.dashboard.jobs,
-    jobToggleStatus: state.dashboard.jobToggleStatus
+    jobToggleStatus: state.dashboard.jobToggleStatus,
+    tabStatus: state.dashboard.tabStatus
 });
 
 const mapDispatchToProps = dispatch => ({

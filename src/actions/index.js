@@ -6,7 +6,8 @@ import {
     ADD_TRUCK_TO_LIST,
     REMOVE_TRUCK_FROM_LIST,
     ORDER_LIST,
-    UPDATE_JOB
+    UPDATE_JOB,
+    SWITCH_TAB
 } from '../constants';
 import { createAction } from 'redux-actions';
 
@@ -18,3 +19,4 @@ export const removeJobInActiveAction = createAction(REMOVE_JOB_IN_ACTIVE);
 export const addTruckToListAction = createAction(ADD_TRUCK_TO_LIST);
 export const removeTruckFromListAction = createAction(REMOVE_TRUCK_FROM_LIST);
 export const updateJobAction = createAction(UPDATE_JOB);
+export const switchTabAction = createAction(SWITCH_TAB);
