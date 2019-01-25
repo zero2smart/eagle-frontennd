@@ -20,7 +20,10 @@ import {
     REMOVE_TRUCK_FROM_LIST_FAILED,
     ORDER_LIST,
     ORDER_LIST_SUCCEEDED,
-    ORDER_LIST_FAILED
+    ORDER_LIST_FAILED,
+    UPDATE_JOB,
+    UPDATE_JOB_SUCCEEDED,
+    UPDATE_JOB_FAILED
 } from '../constants';
 import JobService from '../api/JobService';
 
@@ -81,6 +84,14 @@ function* orderListAsync(action) {
     }
 }
 
+function* updateJobAsync(action) {
+    try {
+        yield put({ type: UPDATE_JOB_SUCCEEDED, payload: action.payload });
+    } catch (e) {
+        yield put({ type: UPDATE_JOB_FAILED, message: e.message });
+    }
+}
+
 export function* watchToggleSideBarAsync() {
     yield takeEvery(TOGGLE_SIDEBAR, toggleSideBarAsync);
 }
@@ -107,4 +118,8 @@ export function* watchRemoveTruckFromListAsync() {
 
 export function* watchOrderListAsync() {
     yield takeEvery(ORDER_LIST, orderListAsync);
+}
+
+export function* watchUpdateJobAsync() {
+    yield takeEvery(UPDATE_JOB, updateJobAsync);
 }

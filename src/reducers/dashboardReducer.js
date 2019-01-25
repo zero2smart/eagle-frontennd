@@ -7,6 +7,7 @@ import {
     ADD_TRUCK_TO_LIST_SUCCEEDED,
     REMOVE_TRUCK_FROM_LIST_SUCCEEDED,
     ORDER_LIST_SUCCEEDED,
+    UPDATE_JOB_SUCCEEDED
 } from '../constants';
 import { arrayMove } from 'react-sortable-hoc';
 
@@ -85,6 +86,26 @@ const dashboardReducer = handleActions(
                 jobs: arrayMove(state.jobs, action.payload.oldIndex, action.payload.newIndex),
                 jobToggleStatus: arrayMove(state.jobToggleStatus, action.payload.oldIndex, action.payload.newIndex)
             };
+        },
+        [UPDATE_JOB_SUCCEEDED]: (state, action) => {
+            let tmp = state.jobs.map((job, i) => {
+                if (job.job_id === action.payload.jobID) {
+                    job.customer_name = action.payload.customerName;
+                    job.quarry_name = action.payload.quarryCodeName;
+                    job.quarry_address = action.payload.deliveryAddress;
+                    job.material = action.payload.material;
+                    job.job_site = action.payload.jobName;
+                    job.haul_rate = action.payload.truckRate;
+                    job.quantity =  action.payload.remarks;
+                }
+
+                return job;
+            });
+
+            return {
+                ...state,
+                jobs: tmp
+            }
         }
     },
     initialState
