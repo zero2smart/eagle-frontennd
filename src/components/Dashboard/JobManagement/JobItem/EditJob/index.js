@@ -56,9 +56,13 @@ class EditJob extends Component {
         return (
             <Modal isOpen={this.props.modal} toggle={this.props.openEditJobDialog} className={this.props.className}>
                 <div className="left-bar"></div>
-                <div className="header-options">
+                {/* <div className="header-options">
                     <div className="rectangle"></div>
                     <div className="hamburger" onClick={this.toggleOptions}>...</div>
+                </div> */}
+                <div className="header-options">
+                    <Button onClick={this.props.openEditJobDialog} className="btn__close">Close</Button>
+                    <Button onClick={this.props.openEditJobDialog} className="btn__update">Update</Button>
                 </div>
                 <ModalHeader toggle={this.props.openEditJobDialog}>
                     {this.props.job.job_id}
