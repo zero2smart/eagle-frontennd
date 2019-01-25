@@ -6,7 +6,7 @@ import {
     REMOVE_JOB_IN_ACTIVE_SUCCEEDED,
     ADD_TRUCK_TO_LIST_SUCCEEDED,
     REMOVE_TRUCK_FROM_LIST_SUCCEEDED,
-    ORDER_LIST_SUCCEEDED
+    ORDER_LIST_SUCCEEDED,
 } from '../constants';
 import { arrayMove } from 'react-sortable-hoc';
 

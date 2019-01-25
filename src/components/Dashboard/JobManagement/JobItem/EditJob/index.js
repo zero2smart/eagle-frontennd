@@ -28,7 +28,6 @@ class EditJob extends Component {
         this.state = {
             optionsOpen: false
         };
-
         // this.toggleOptions = this.toggleOptions.bind(this);
     }
 
@@ -117,15 +116,9 @@ class EditJob extends Component {
                     </Row>
                 </ModalBody>
                 <div className={`${this.state.optionsOpen ? 'options-dropdown' : 'd-none'}`} ref={node => this.optionsRef = node}>
-                    <p className="options-item">
-                        View Order
-                    </p>
-                    <p className="options-item">
-                        Edit Order
-                    </p>
-                    <p className="options-item">
-                        Cancel Order
-                    </p>
+                    <p className="options-item">View Order</p>
+                    <p className="options-item">Edit Order</p>
+                    <p className="options-item">Cancel Order</p>
                 </div>
             </Modal>
         );

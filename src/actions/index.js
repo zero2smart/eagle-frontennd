@@ -5,7 +5,7 @@ import {
     REMOVE_JOB_IN_ACTIVE,
     ADD_TRUCK_TO_LIST,
     REMOVE_TRUCK_FROM_LIST,
-    ORDER_LIST
+    ORDER_LIST,
 } from '../constants';
 import { createAction } from 'redux-actions';
 

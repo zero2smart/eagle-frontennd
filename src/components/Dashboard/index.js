@@ -14,12 +14,20 @@ class Dashboard extends Component {
 
         this.state = {
             activeTab: ACTIVE_TAB,
-            openCalendar: false
+            openCalendar: false,
+            searchTerm: ''
         };
 
         this.switchTab = this.switchTab.bind(this);
         this.toggleCalendar = this.toggleCalendar.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
+        this.onSearch = this.onSearch.bind(this);
+    }
+
+    onSearch(e) {
+        this.setState({ searchTerm: e.target.value }, () => {
+
+        });
     }
 
     switchTab(e, status) {
@@ -86,11 +94,11 @@ class Dashboard extends Component {
                         </span>
                     </div>}
                     <div className="tab-block__right">
-                        <input type="text" placeholder="Search" />
+                        <input type="text" value={this.state.searchTerm} onChange={this.onSearch} placeholder="Search" />
                     </div>
                 </div>
                 <div className="job-list-block">
-                    <JobManagement distance={2} status={this.state.activeTab} axis="xy" onSortEnd={this.props.onSortEnd} helperClass="sort" />
+                    <JobManagement distance={2} searchTerm={this.state.searchTerm} status={this.state.activeTab} axis="xy" onSortEnd={this.props.onSortEnd} helperClass="sort" />
                 </div>
                 {this.state.openCalendar &&
                     <div className="calendar">
@@ -108,7 +116,7 @@ class Dashboard extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onSortEnd: ({ oldIndex, newIndex }) => dispatch(orderListAction({ oldIndex, newIndex }))
+    onSortEnd: ({ oldIndex, newIndex }) => dispatch(orderListAction({ oldIndex, newIndex })),
 });
 
 export default connect(null, mapDispatchToProps)(Dashboard);

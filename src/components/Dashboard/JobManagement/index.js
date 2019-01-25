@@ -47,7 +47,7 @@ class JobManagement extends Component {
                 <Table>
                     <tbody>
                         {
-                            this.props.jobs.map((job, i) => {
+                            this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1).map((job, i) => {
                                 let isAllMinus = true;
 
                                 for (let j = 0; j < jts.length; j++) {
@@ -56,8 +56,6 @@ class JobManagement extends Component {
                                         break;
                                     }
                                 }
-
-                                console.log(isAllMinus);
 
                                 return <JobItem
                                         key={job.job_id}
@@ -79,7 +77,8 @@ class JobManagement extends Component {
 JobManagement.propTypes = {
     jobs: PropTypes.array.isRequired,
     jobToggleStatus: PropTypes.array.isRequired,
-    status: PropTypes.number.isRequired
+    status: PropTypes.number.isRequired,
+    searchTerm: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({
