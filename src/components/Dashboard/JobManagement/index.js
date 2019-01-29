@@ -49,7 +49,7 @@ class JobManagement extends Component {
                     <tbody>
                         {
                             this.props.tabStatus === ACTIVE_TAB ?
-                            this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1).map((job, i) => {
+                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1 || job.customer_name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) !== -1 || job.trucks.includes(Number(this.props.searchTerm)) || job.dispatched_trucks.includes(Number(this.props.searchTerm))).map((job, i) => {
                                 let isAllMinus = true;
 
                                 for (let j = 0; j < jts.length; j++) {
@@ -68,7 +68,7 @@ class JobManagement extends Component {
                                         applyToggleStatus={this.applyToggleStatus}
                                         status={this.props.status} />;
                             }) :
-                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1).filter(job => new Date(job.date) >= this.props.startDate && new Date(job.date) <= this.props.endDate).map((job, i) => {
+                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1 || job.customer_name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) !== -1 || job.trucks.includes(Number(this.props.searchTerm)) || job.dispatched_trucks.includes(Number(this.props.searchTerm))).filter(job => new Date(job.date) >= this.props.startDate && new Date(job.date) <= this.props.endDate).map((job, i) => {
                                     let isAllMinus = true;
 
                                     for (let j = 0; j < jts.length; j++) {
