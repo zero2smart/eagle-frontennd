@@ -110,13 +110,13 @@ class Dashboard extends Component {
                             Completed
                         </span>
                     </div>
-                    {this.props.tabStatus === COMPLETED_TAB && <div className="tab-block__middle" ref={node => this.middleRef = node}>
+                    <div className={`${this.props.tabStatus === COMPLETED_TAB ? '' : 'd-none'} tab-block__middle`} ref={node => this.middleRef = node}>
                         <span>Date Range:&nbsp;</span>
                         <span id="date" onClick={this.toggleCalendar} ref={node => this.date = node}>Select</span>
                         <span className="down-arrow">
                             <FontAwesomeIcon className="fa-my-down" color="#ffffff" icon={faChevronDown} onClick={this.toggleCalendar} />
                         </span>
-                    </div>}
+                    </div>
                     <div className="tab-block__right">
                         <input type="text" value={this.state.searchTerm} onChange={this.onSearch} placeholder="Search" />
                     </div>
@@ -135,7 +135,6 @@ class Dashboard extends Component {
                 <div className={`${this.state.openCalendar ? '' : 'd-none'} calendar`}>
                     <div className="title">PICK RANGE DATE</div>
                     <DateRange
-                        onInit={this.handleSelect}
                         onChange={this.handleChange}
                     />
                     <div className="bottom" />
