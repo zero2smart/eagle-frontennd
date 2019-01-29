@@ -10,6 +10,7 @@ import {
     SortableElement,
     arrayMove,
 } from 'react-sortable-hoc';
+import { ACTIVE_TAB, COMPLETE_TAB } from '../../../constants';
 
 class JobManagement extends Component {
     constructor(props) {
@@ -47,6 +48,7 @@ class JobManagement extends Component {
                 <Table>
                     <tbody>
                         {
+                            this.props.tabStatus === ACTIVE_TAB ?
                             this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1).map((job, i) => {
                                 let isAllMinus = true;
 
@@ -65,7 +67,26 @@ class JobManagement extends Component {
                                         className={isAllMinus ? 'o-100' : ''}
                                         applyToggleStatus={this.applyToggleStatus}
                                         status={this.props.status} />;
-                            })
+                            }) :
+                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1).filter(job => new Date(job.date) >= this.props.startDate && new Date(job.date) <= this.props.endDate).map((job, i) => {
+                                    let isAllMinus = true;
+
+                                    for (let j = 0; j < jts.length; j++) {
+                                        if (jts[j] === true) {
+                                            isAllMinus = false;
+                                            break;
+                                        }
+                                    }
+
+                                    return <JobItem
+                                        key={job.job_id}
+                                        job={job}
+                                        index={i}
+                                        idx={i}
+                                        className={isAllMinus ? 'o-100' : ''}
+                                        applyToggleStatus={this.applyToggleStatus}
+                                        status={this.props.status} />;
+                                })
                         }
                     </tbody>
                 </Table>

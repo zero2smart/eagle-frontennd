@@ -17,13 +17,14 @@ class Dashboard extends Component {
         this.state = {
             openCalendar: false,
             searchTerm: '',
-            startDate: moment(),
+            startDate: moment('1999-01-01'),
             endDate: moment()
         };
 
         this.onSwitchTab = this.onSwitchTab.bind(this);
         this.toggleCalendar = this.toggleCalendar.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
     }
 
@@ -42,7 +43,7 @@ class Dashboard extends Component {
     }
 
     toggleCalendar() {
-        this.middleRef.style.flex = 2.5;
+        this.middleRef.style.flex = 1.5;
 
         this.setState( { openCalendar: !this.state.openCalendar }, () => {
             if (this.state.openCalendar === true) {
@@ -66,8 +67,15 @@ class Dashboard extends Component {
     }
 
     handleSelect(range) {
-        this.date.innerHTML = range.startDate.format('MM-DD-YYYY') + ' | ' + range.endDate.format('MM-DD-YYYY');
-        this.setState({ startDate: range.startDate, endDate: range.endDate });
+        if (this.date)
+            this.date.innerHTML = range.startDate.format('MM-DD-YYYY') + ' | ' + range.endDate.format('MM-DD-YYYY');
+    }
+
+    handleChange(range) {
+        if (this.date) {
+            this.date.innerHTML = range.startDate.format('MM-DD-YYYY') + ' | ' + range.endDate.format('MM-DD-YYYY');
+            this.setState({ startDate: range.startDate, endDate: range.endDate });
+        }
     }
 
     createElementFromHTML(htmlString) {
@@ -124,16 +132,14 @@ class Dashboard extends Component {
                         startDate={this.state.startDate}
                         endDate={this.state.endDate} />
                 </div>
-                {this.state.openCalendar &&
-                    <div className="calendar">
-                        <div className="title">PICK RANGE DATE</div>
-                        <DateRange
-                            onInit={this.handleSelect}
-                            onChange={this.handleSelect}
-                        />
-                        <div className="bottom" />
-                    </div>
-                }
+                <div className={`${this.state.openCalendar ? '' : 'd-none'} calendar`}>
+                    <div className="title">PICK RANGE DATE</div>
+                    <DateRange
+                        onInit={this.handleSelect}
+                        onChange={this.handleChange}
+                    />
+                    <div className="bottom" />
+                </div>
             </div>
         );
     }
