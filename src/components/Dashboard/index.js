@@ -45,7 +45,7 @@ class Dashboard extends Component {
     toggleCalendar() {
         this.middleRef.style.flex = 1.5;
 
-        this.setState( { openCalendar: !this.state.openCalendar }, () => {
+        this.setState({ openCalendar: !this.state.openCalendar }, () => {
             if (this.state.openCalendar === true) {
                 let prevButton = document.getElementsByClassName('rdr-MonthAndYear-button prev');
 
@@ -67,7 +67,7 @@ class Dashboard extends Component {
     }
 
     handleSelect(range) {
-        if (this.date)
+        if (this.date && this.state.openCalendar)
             this.date.innerHTML = range.startDate.format('MM-DD-YYYY') + ' | ' + range.endDate.format('MM-DD-YYYY');
     }
 
@@ -135,6 +135,7 @@ class Dashboard extends Component {
                 <div className={`${this.state.openCalendar ? '' : 'd-none'} calendar`}>
                     <div className="title">PICK RANGE DATE</div>
                     <DateRange
+                        onInit={this.handleSelect}
                         onChange={this.handleChange}
                     />
                     <div className="bottom" />
