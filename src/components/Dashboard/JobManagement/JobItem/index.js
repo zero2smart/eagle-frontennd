@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import './index.scss';
 import { connect } from 'react-redux';
-import { changeJobToggleStatusAction } from '../../../../actions';
+import {
+    changeJobToggleStatusAction,
+    removeJobInActiveAction,
+    addTruckToListAction,
+    removeTruckFromListAction
+} from '../../../../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 import faPlus from '../../../../assets/images/plus-symbol-in-a-rounded-black-square.png';
 import faPlusDisabled from '../../../../assets/images/disabled-plus-symbol-in-a-rounded-black-square.png';
 import faMinus from '../../../../assets/images/minus-sign-inside-a-black-circle.png';
 import EditJob from './EditJob';
 import { ACTIVE_TAB, COMPLETED_TAB } from '../../../../constants';
+import {
+    SortableContainer,
+    SortableElement,
+    arrayMove,
+} from 'react-sortable-hoc';
 
 class JobItem extends Component {
     constructor(props) {
@@ -18,16 +29,26 @@ class JobItem extends Component {
         this.state = {
             showTruckList: false,
             truckStatusList: [],
-            jobList: [],
-            modal: false
+            modal: false,
+            checked: false
         };
 
         this.toggleSideBar = this.toggleSideBar.bind(this);
         this.toggleTruckList = this.toggleTruckList.bind(this);
         this.addTruck = this.addTruck.bind(this);
+        this.removeTruck = this.removeTruck.bind(this);
         this.openEditJobDialog = this.openEditJobDialog.bind(this);
+        this.setJobToComplete = this.setJobToComplete.bind(this);
 
         this.truckElements = [];
+    }
+
+    setJobToComplete() {
+        this.setState({ checked: true });
+
+        setTimeout(() => {
+            this.props.removeJobInActive(this.props.job.job_id);
+        }, 300);
     }
 
     openEditJobDialog() {
@@ -42,25 +63,27 @@ class JobItem extends Component {
 
     toggleTruckList() {
         this.setState({ showTruckList: !this.state.showTruckList }, () => {
-            this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
+            this.props.changeJobToggleStatus(this.props.idx, this.state.showTruckList);
             this.props.applyToggleStatus(this.props.jobToggleStatus);
         });
     }
 
     componentDidMount() {
-        this.props.changeJobToggleStatus(this.props.index, this.state.showTruckList);
+        this.props.changeJobToggleStatus(this.props.idx, this.state.showTruckList);
     }
 
     addTruck(n, i) {
-        this.truckElements[i].style.color = '#626269';
-        this.truckElements[i].style.borderColor = '#626269';
-        this.setState(prev => {
-            let tmp = prev.jobList;
-            tmp.push(n);
-            return {
-                jobList: tmp
-            };
-        });
+        // this.truckElements[i].style.color = '#626269';
+        // this.truckElements[i].style.borderColor = '#626269';
+
+        this.props.addTruckToList(this.props.job.job_id, n);
+    }
+
+    removeTruck(n, i) {
+        // this.truckElements[i].style.color = '#626269';
+        // this.truckElements[i].style.borderColor = '#626269';
+
+        this.props.removeTruckFromList(this.props.job.job_id, n);
     }
 
     render() {
@@ -68,8 +91,8 @@ class JobItem extends Component {
             return (
                 this.props.job.status === "active" ?
                     <React.Fragment>
-                        <tr className={`${!this.state.showTruckList ? 'o-30' : ''}`} style={this.props.style}>
-                            <th scope="active" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
+                        <tr className={`${!this.state.showTruckList ? 'o-30' : ''} ${this.props.className}`}>
+                            <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
                             <td>{this.props.job.material}</td>
@@ -83,12 +106,12 @@ class JobItem extends Component {
                                         {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
                                         {!this.state.showTruckList ?
                                             <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
-                                            : <img src={faMinus} className="fa-my-minus-square" alt="Minus Square" width={20} height={20} onClick={this.toggleTruckList} />
+                                            : <FontAwesomeIcon className="fa-my-check" icon={faCheck} onClick={this.toggleTruckList} />
                                         }
                                     </div>
                                     <div className="job-item">
-                                        {this.state.jobList.map((n, i) => (
-                                            <div className="job-number" key={i}>
+                                        {this.props.job.dispatched_trucks.map((n, i) => (
+                                            <div className="job-number" onClick={() => this.removeTruck(n, i)} key={i}>
                                                 {n}
                                             </div>
                                         ))}
@@ -96,39 +119,38 @@ class JobItem extends Component {
                                 </div>
                             </td>
                             <td>
-                                <div></div>
+                                <div onClick={this.setJobToComplete} className={`${this.state.checked ? 'checked' : ''}`}></div>
                             </td>
                         </tr>
                         <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`} style={this.props.style}>
                             <div className="truck-list">
-                                <div className="threedot">
+                                <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
                                     <div></div>
                                     <div></div>
                                     <div></div>
                                 </div>
                                 <div className="d-flex-wrap">
-                                    {[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
-                                        121, 122, 123, 124, 125, 126, 127, 128].map((n, i) => (
-                                            <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node} key={i}>
-                                                {n}
-                                            </div>
-                                        ))}
+                                    {this.props.job.trucks.map((n, i) => (
+                                        <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node} key={i}>
+                                            {n}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </tr>
                         <EditJob
                             className="edit-job-modal"
                             modal={this.state.modal}
-                            trucks={this.state.jobList}
+                            trucks={this.props.job.dispatched_trucks}
                             job={this.props.job}
                             openEditJobDialog={this.openEditJobDialog} />
-                    </React.Fragment> : null
+                    </React.Fragment> : <tr />
             );
         } else if (this.props.status === COMPLETED_TAB) {
             return (
                 this.props.job.status === "completed" ?
                     <React.Fragment>
-                        <tr>
+                        <tr className={`${this.props.className}`}>
                             <th scope="completed" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
@@ -144,7 +166,7 @@ class JobItem extends Component {
                                         <img src={faPlusDisabled} className="fa-my-plus-square-disabled" alt="Plus Square Disabled" width={20} height={20} />
                                     </div>
                                     <div className="job-item">
-                                        {this.props.job.trucks.map((n, i) => (
+                                        {this.props.job.dispatched_trucks.map((n, i) => (
                                             <div className="job-number" key={i}>
                                                 {n}
                                             </div>
@@ -159,10 +181,10 @@ class JobItem extends Component {
                         <EditJob
                             className="edit-job-modal"
                             modal={this.state.modal}
-                            trucks={this.state.jobList}
+                            trucks={this.props.job.dispatched_trucks}
                             job={this.props.job}
                             openEditJobDialog={this.openEditJobDialog} />
-                    </React.Fragment> : null
+                    </React.Fragment> : <tr />
             );
         }
     }
@@ -170,12 +192,19 @@ class JobItem extends Component {
 
 JobItem.propTypes = {
     job: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired,
+    idx: PropTypes.number.isRequired,
     jobToggleStatus: PropTypes.array.isRequired,
     changeJobToggleStatus: PropTypes.func.isRequired,
+    removeJobInActive: PropTypes.func.isRequired,
+    addTruckToList: PropTypes.func.isRequired,
+    removeTruckFromList: PropTypes.func.isRequired,
     applyToggleStatus: PropTypes.func.isRequired,
-    style: PropTypes.object.isRequired,
-    status: PropTypes.string.isRequired
+    className: PropTypes.string.isRequired,
+    status: PropTypes.number.isRequired
+}
+
+JobItem.defaultProps = {
+    status: ACTIVE_TAB
 }
 
 const mapStateToProps = state => ({
@@ -183,7 +212,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    changeJobToggleStatus: (index, status) => dispatch(changeJobToggleStatusAction({ index: index, status: status }))
+    changeJobToggleStatus: (index, status) => dispatch(changeJobToggleStatusAction({ index: index, status: status })),
+    removeJobInActive: (id) => dispatch(removeJobInActiveAction(id)),
+    addTruckToList: (job_id, number) => dispatch(addTruckToListAction({ job_id: job_id, number: number })),
+    removeTruckFromList: (job_id, number) => dispatch(removeTruckFromListAction({ job_id: job_id, number: number }))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobItem);
+export default connect(mapStateToProps, mapDispatchToProps)(SortableElement(JobItem));

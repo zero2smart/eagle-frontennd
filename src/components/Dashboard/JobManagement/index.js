@@ -5,6 +5,12 @@ import JobItem from './JobItem';
 import { getJobsAction } from '../../../actions';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
+import {
+    SortableContainer,
+    SortableElement,
+    arrayMove,
+} from 'react-sortable-hoc';
+import { ACTIVE_TAB, COMPLETE_TAB } from '../../../constants';
 
 class JobManagement extends Component {
     constructor(props) {
@@ -21,8 +27,9 @@ class JobManagement extends Component {
         this.props.getJobsAction();
     }
 
-    componentDidUpdate(prevProps, prevState) {
-
+    shouldComponentUpdate(prevProps, prevState) {
+        console.log(prevState);
+        return true;
     }
 
     applyToggleStatus(jts) {
@@ -31,13 +38,18 @@ class JobManagement extends Component {
 
     render() {
         let jts = this.state.jobToggleStatus;
+        let dd = {
+            opacity: 1 + ' !important',
+            zIndex: 100
+        };
 
         return (
             <div className="job-management-container">
                 <Table>
                     <tbody>
                         {
-                            this.props.jobs.map((job, i) => {
+                            this.props.tabStatus === ACTIVE_TAB ?
+                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1 || job.customer_name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) !== -1 || job.trucks.includes(Number(this.props.searchTerm)) || job.dispatched_trucks.includes(Number(this.props.searchTerm))).map((job, i) => {
                                 let isAllMinus = true;
 
                                 for (let j = 0; j < jts.length; j++) {
@@ -46,8 +58,36 @@ class JobManagement extends Component {
                                         break;
                                     }
                                 }
-                                return <JobItem key={job.job_id} job={job} index={i} style={isAllMinus ? { opacity: 1 } : {}} applyToggleStatus={this.applyToggleStatus} status={this.props.status} />;
-                            })}
+
+                                return <JobItem
+                                        key={job.job_id}
+                                        job={job}
+                                        index={i}
+                                        idx={i}
+                                        className={isAllMinus ? 'o-100' : ''}
+                                        applyToggleStatus={this.applyToggleStatus}
+                                        status={this.props.status} />;
+                            }) :
+                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1 || job.customer_name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) !== -1 || job.trucks.includes(Number(this.props.searchTerm)) || job.dispatched_trucks.includes(Number(this.props.searchTerm))).filter(job => new Date(job.date) >= this.props.startDate && new Date(job.date) <= this.props.endDate).map((job, i) => {
+                                    let isAllMinus = true;
+
+                                    for (let j = 0; j < jts.length; j++) {
+                                        if (jts[j] === true) {
+                                            isAllMinus = false;
+                                            break;
+                                        }
+                                    }
+
+                                    return <JobItem
+                                        key={job.job_id}
+                                        job={job}
+                                        index={i}
+                                        idx={i}
+                                        className={isAllMinus ? 'o-100' : ''}
+                                        applyToggleStatus={this.applyToggleStatus}
+                                        status={this.props.status} />;
+                                })
+                        }
                     </tbody>
                 </Table>
             </div>
@@ -58,16 +98,21 @@ class JobManagement extends Component {
 JobManagement.propTypes = {
     jobs: PropTypes.array.isRequired,
     jobToggleStatus: PropTypes.array.isRequired,
-    status: PropTypes.number.isRequired
+    status: PropTypes.number.isRequired,
+    searchTerm: PropTypes.string.isRequired,
+    startDate: PropTypes.object.isRequired,
+    endDate: PropTypes.object.isRequired,
+    tabStatus: PropTypes.number.isRequired
 }
 
 const mapStateToProps = state => ({
     jobs: state.dashboard.jobs,
-    jobToggleStatus: state.dashboard.jobToggleStatus
+    jobToggleStatus: state.dashboard.jobToggleStatus,
+    tabStatus: state.dashboard.tabStatus
 });
 
 const mapDispatchToProps = dispatch => ({
     getJobsAction: () => dispatch(getJobsAction())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobManagement);
+export default connect(mapStateToProps, mapDispatchToProps)(SortableContainer(JobManagement));
