@@ -136,7 +136,7 @@ const dashboardReducer = handleActions(
         }),
         [GET_AVAILABLE_TRUCKS_SUCCEEDED]: (state, action) => ({
             ...state,
-            trucks: action.payload.trucks
+            trucks: action.payload
         })
 
     },

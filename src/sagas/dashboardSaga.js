@@ -44,7 +44,7 @@ function* toggleSideBarAsync(action) {
 function* getJobsAsync(action) {
     try {
         const jobs = yield call(JobService.fetchJobs);
-        yield put({ type: GET_JOBS_SUCCEEDED, payload: jobs.data });
+        yield put({ type: GET_JOBS_SUCCEEDED, payload: jobs.data.data });
     } catch (e) {
         yield put({ type: GET_JOBS_FAILED, message: e.message });
     }
@@ -109,7 +109,7 @@ function* switchTabAsync(action) {
 function* getAvailableTrucksAsync(action) {
     try {
         const trucks = yield call(JobService.fetchAvailableTrucks);
-        yield put({ type: GET_AVAILABLE_TRUCKS_SUCCEEDED, payload: trucks.data });
+        yield put({ type: GET_AVAILABLE_TRUCKS_SUCCEEDED, payload: trucks.data.data });
     } catch (e) {
         yield put({ type: GET_AVAILABLE_TRUCKS_FAILED, message: e.message });
     }
