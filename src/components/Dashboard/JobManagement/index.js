@@ -65,6 +65,7 @@ class JobManagement extends Component {
                                         index={i}
                                         idx={i}
                                         className={isAllMinus ? 'o-100' : ''}
+                                        hasSearchKeyword={this.props.searchTerm.length === 0 ? false : true}
                                         applyToggleStatus={this.applyToggleStatus}
                                         status={this.props.status} />;
                             }) :
@@ -85,6 +86,7 @@ class JobManagement extends Component {
                                         idx={i}
                                         className={isAllMinus ? 'o-100' : ''}
                                         applyToggleStatus={this.applyToggleStatus}
+                                        hasSearchKeyword={this.props.searchTerm.length === 0 ? false : true}
                                         status={this.props.status} />;
                                 })
                         }

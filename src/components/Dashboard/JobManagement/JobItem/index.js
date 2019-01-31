@@ -91,7 +91,7 @@ class JobItem extends Component {
             return (
                 this.props.job.status === "active" ?
                     <React.Fragment>
-                        <tr className={`${!this.state.showTruckList ? 'o-30' : ''} ${this.props.className}`}>
+                        <tr className={`${!this.state.showTruckList ? 'o-30' : ''} ${this.props.hasSearchKeyword ? 'o-100' : ''} ${this.props.className}`}>
                             <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
@@ -200,11 +200,13 @@ JobItem.propTypes = {
     removeTruckFromList: PropTypes.func.isRequired,
     applyToggleStatus: PropTypes.func.isRequired,
     className: PropTypes.string.isRequired,
-    status: PropTypes.number.isRequired
+    status: PropTypes.number.isRequired,
+    hasSearchKeyword: PropTypes.bool.isRequired
 }
 
 JobItem.defaultProps = {
-    status: ACTIVE_TAB
+    status: ACTIVE_TAB,
+    hasSearchKeyword: false
 }
 
 const mapStateToProps = state => ({
