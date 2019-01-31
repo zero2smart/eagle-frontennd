@@ -2,6 +2,8 @@ tr {
     color: #E7E7E7;
     border-bottom-width: 2px;
     border-bottom-color: #1D1D1D;
+    border-top-width: 2px;
+    border-top-color: #1D1D1D;
 
     th[scope="active"] {
         height: 32px;
@@ -288,6 +290,7 @@ tr {
 
 .o-30 {
     opacity: 0.3;
+    z-index: 100;
 }
 
 .o-100 {

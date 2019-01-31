@@ -21,6 +21,7 @@ const initialState = {
     jobToggleStatus: [],
     errors: {},
     trucks: [],
+    trucks_count: {},
     tabStatus: ACTIVE_TAB
 };
 
@@ -58,12 +59,17 @@ const dashboardReducer = handleActions(
         },
         [ADD_TRUCK_TO_LIST_SUCCEEDED]: (state, action) => {
             let trucks = state.trucks;
+            let trucks_count = state.trucks_count;
 
             let tmp = state.jobs.map((job, i) => {
                 if (job.job_id === action.payload.job_id) {
                     job.dispatched_trucks.push(action.payload.number);
-                    let index = trucks.indexOf(action.payload.number);
-                    trucks.splice(index, 1);
+                    if (trucks_count[action.payload.number] == undefined)
+                        trucks_count[action.payload.number] = 0;
+
+                    trucks_count[action.payload.number] += 1;
+                    // let index = trucks.indexOf(action.payload.number);
+                    // trucks.splice(index, 1);
                 }
                 return job;
             });
@@ -76,12 +82,15 @@ const dashboardReducer = handleActions(
         },
         [REMOVE_TRUCK_FROM_LIST_SUCCEEDED]: (state, action) => {
             let trucks = state.trucks;
+            let trucks_count = state.trucks_count;
 
             let tmp = state.jobs.map((job, i) => {
                 if (job.job_id === action.payload.job_id) {
-                    trucks.push(action.payload.number);
+                    // trucks.push(action.payload.number);
                     let index = job.dispatched_trucks.indexOf(action.payload.number);
                     job.dispatched_trucks.splice(index, 1);
+
+                    trucks_count[action.payload.number]--;
                 }
                 return job;
             });

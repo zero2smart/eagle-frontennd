@@ -91,7 +91,7 @@ class JobItem extends Component {
             return (
                 this.props.job.status === "active" ?
                     <React.Fragment>
-                        <tr className={`${!this.state.showTruckList ? 'o-30' : ''} ${this.props.hasSearchKeyword ? 'o-100' : ''} ${this.props.className}`}>
+                        <tr className={`${!this.state.showTruckList ? 'o-30' : 'o-100'} ${this.props.hasSearchKeyword ? 'o-100' : ''} ${this.props.className}`}>
                             <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                             <td>{this.props.job.quarry_name}</td>
                             <td>{this.props.job.quarry_address}</td>
@@ -122,7 +122,7 @@ class JobItem extends Component {
                                 <div onClick={this.setJobToComplete} className={`${this.state.checked ? 'checked' : ''}`}></div>
                             </td>
                         </tr>
-                        <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section`} style={this.props.style}>
+                        <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section ${this.props.className}`}>
                             <div className="truck-list">
                                 <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
                                     <div></div>
