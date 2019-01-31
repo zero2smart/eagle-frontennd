@@ -50,7 +50,10 @@ class JobManagement extends Component {
                     <tbody>
                         {
                             this.props.tabStatus === ACTIVE_TAB ?
-                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1 || job.customer_name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) !== -1 || job.trucks.includes(Number(this.props.searchTerm)) || job.dispatched_trucks.includes(Number(this.props.searchTerm))).map((job, i) => {
+                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1
+                                || job.customer_name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) !== -1
+                                || this.props.trucks.includes(Number(this.props.searchTerm))
+                                || job.dispatched_trucks.includes(Number(this.props.searchTerm))).map((job, i) => {
                                 let isAllMinus = true;
 
                                 for (let j = 0; j < jts.length; j++) {
@@ -71,7 +74,12 @@ class JobManagement extends Component {
                                         applyToggleStatus={this.applyToggleStatus}
                                         status={this.props.status} />;
                             }) :
-                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1 || job.customer_name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) !== -1 || job.trucks.includes(Number(this.props.searchTerm)) || job.dispatched_trucks.includes(Number(this.props.searchTerm))).filter(job => new Date(job.date) >= this.props.startDate && new Date(job.date) <= this.props.endDate).map((job, i) => {
+                                this.props.jobs.filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1
+                                || job.customer_name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) !== -1
+                                || this.props.trucks.includes(Number(this.props.searchTerm))
+                                || job.dispatched_trucks.includes(Number(this.props.searchTerm)))
+                                .filter(job => new Date(job.date) >= this.props.startDate
+                                    && new Date(job.date) <= this.props.endDate).map((job, i) => {
                                     let isAllMinus = true;
 
                                     for (let j = 0; j < jts.length; j++) {
@@ -109,7 +117,8 @@ JobManagement.propTypes = {
     endDate: PropTypes.object.isRequired,
     tabStatus: PropTypes.number.isRequired,
     getJobsAction: PropTypes.func.isRequired,
-    getAvailableTrucks: PropTypes.func.isRequired
+    getAvailableTrucks: PropTypes.func.isRequired,
+    trucks: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({

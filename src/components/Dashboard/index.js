@@ -135,7 +135,6 @@ class Dashboard extends Component {
                 <div className={`${this.state.openCalendar ? '' : 'd-none'} calendar`}>
                     <div className="title">PICK RANGE DATE</div>
                     <DateRange
-                        onInit={this.handleSelect}
                         onChange={this.handleChange}
                     />
                     <div className="bottom" />
