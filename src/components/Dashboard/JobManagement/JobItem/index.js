@@ -125,11 +125,32 @@ class JobItem extends Component {
                                         }
                                     </div>
                                     <div className="job-item">
-                                        {this.props.job.dispatched_trucks.map((n, i) => (
-                                            <div className="job-number" onClick={() => this.removeTruck(n, i)} key={i}>
+                                        {this.props.job.dispatched_trucks.map((n, i) => {
+                                            let style = {};
+
+                                            if (this.props.trucksCount[n] === 1)
+                                                style = {
+                                                    backgroundColor: '#626269',
+                                                    border: '1px solid #626269'
+                                                };
+                                            else if (this.props.trucksCount[n] === 2)
+                                                style = {
+                                                    backgroundColor: '#CFD15D',
+                                                    border: '1px solid #CFD15D'
+                                                };
+                                            else if (this.props.trucksCount[n] > 2)
+                                                style = {
+                                                    backgroundColor: '#FF0000',
+                                                    border: '1px solid #FF0000'
+                                                };
+
+                                            return <div
+                                                className="job-number"
+                                                onClick={() => this.removeTruck(n, i)}
+                                                key={i}>
                                                 {n}
-                                            </div>
-                                        ))}
+                                            </div>;
+                                        })}
                                     </div>
                                 </div>
                             </td>
