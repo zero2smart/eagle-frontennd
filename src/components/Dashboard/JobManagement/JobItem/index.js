@@ -87,6 +87,21 @@ class JobItem extends Component {
     }
 
     render() {
+        const grey = {
+            color: '#626269',
+            border: '1px solid #626269'
+        };
+
+        const yellow = {
+            color: '#CFD15D',
+            border: '1px solid #CFD15D'
+        };
+
+        const red = {
+            color: '#FF0000',
+            border: '1px solid #FF0000'
+        };
+
         if (this.props.status === ACTIVE_TAB) {
             return (
                 this.props.job.status === "active" ?
@@ -130,11 +145,25 @@ class JobItem extends Component {
                                     <div></div>
                                 </div>
                                 <div className="d-flex-wrap">
-                                    {this.props.trucks.map((n, i) => (
-                                        <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node} key={i}>
+                                    {this.props.trucks.map((n, i) => {
+                                        let style = {};
+
+                                        if (this.props.trucksCount[n] === 1)
+                                            style = grey;
+                                        else if (this.props.trucksCount[n] === 2)
+                                            style = yellow;
+                                        else if (this.props.trucksCount[n] > 2)
+                                            style = red;
+
+                                        return <div
+                                            className="truck-number"
+                                            onClick={() => this.addTruck(n, i)}
+                                            ref={node => this.truckElements[i] = node}
+                                            style={style}
+                                            key={i}>
                                             {n}
-                                        </div>
-                                    ))}
+                                        </div>;
+                                    })}
                                 </div>
                             </div>
                         </tr>
@@ -202,7 +231,8 @@ JobItem.propTypes = {
     className: PropTypes.string.isRequired,
     status: PropTypes.number.isRequired,
     hasSearchKeyword: PropTypes.bool.isRequired,
-    trucks: PropTypes.array.isRequired
+    trucks: PropTypes.array.isRequired,
+    trucksCount: PropTypes.object.isRequired
 }
 
 JobItem.defaultProps = {
@@ -211,7 +241,8 @@ JobItem.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-    jobToggleStatus: state.dashboard.jobToggleStatus
+    jobToggleStatus: state.dashboard.jobToggleStatus,
+    trucksCount: state.dashboard.trucksCount
 });
 
 const mapDispatchToProps = dispatch => ({
