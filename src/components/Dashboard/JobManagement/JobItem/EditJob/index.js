@@ -94,25 +94,25 @@ class EditJob extends Component {
                     <Row>
                         <div className="job-field w-192">
                             <label for="customerName">Customer Name</label>
-                            <input type="text" name="customerName" id="customerName" onChange={this.onChange} defaultValue={this.props.job.customer_name} />
+                            <span name="customerName" id="customerName">{this.props.job.customer_name}</span>
                         </div>
                         <div className="job-field w-192">
                             <label for="quarryCodeName">Quarry Code Name</label>
-                            <input type="text" name="quarryCodeName" id="quarryCodeName" onChange={this.onChange} defaultValue={this.props.job.quarry_name} />
+                            <span name="quarryCodeName" id="quarryCodeName">{this.props.job.quarry_name}</span>
                         </div>
                         <div className="job-field w-192">
                             <label for="material">Material</label>
-                            <input type="text" name="material" id="material" onChange={this.onChange} defaultValue={this.props.job.material} />
+                            <span name="material" id="material">{this.props.job.material}</span>
                         </div>
                         <div className="job-field w-192">
                             <label for="jobName">Job Name</label>
-                            <input type="text" name="jobName" id="jobName" onChange={this.onChange} defaultValue={this.props.job.job_site} />
+                            <span name="jobName" id="jobName">{this.props.job.job_site}</span>
                         </div>
                     </Row>
                     <Row>
                         <div className="job-field w-402">
                             <label for="deliveryAddress">Delivery Address</label>
-                            <input type="text" name="deliveryAddress" id="deliveryAddress" onChange={this.onChange} defaultValue={this.props.job.quarry_address} />
+                            <span name="deliveryAddress" id="deliveryAddress">{this.props.job.quarry_address}</span>
                         </div>
                         <div className="job-field w-192">
                             <label for="remarks">Remarks</label>
@@ -120,7 +120,7 @@ class EditJob extends Component {
                         </div>
                         <div className="job-field w-192">
                             <label for="truckRate">Truck Rate</label>
-                            <input type="text" name="truckRate" id="truckRate" onChange={this.onChange} defaultValue={this.props.job.haul_rate} />
+                            <span name="truckRate" id="truckRate">{this.props.job.haul_rate}</span>
                         </div>
                     </Row>
                     <Row>
