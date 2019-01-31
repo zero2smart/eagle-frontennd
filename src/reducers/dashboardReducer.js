@@ -63,13 +63,15 @@ const dashboardReducer = handleActions(
 
             let tmp = state.jobs.map((job, i) => {
                 if (job.job_id === action.payload.job_id) {
-                    job.dispatched_trucks.push(action.payload.number);
-                    if (trucks_count[action.payload.number] == undefined)
-                        trucks_count[action.payload.number] = 0;
+                    if (job.dispatched_trucks.indexOf(action.payload.number) === -1) {
+                        job.dispatched_trucks.push(action.payload.number);
+                        if (trucks_count[action.payload.number] == undefined)
+                            trucks_count[action.payload.number] = 0;
 
-                    trucks_count[action.payload.number] += 1;
-                    // let index = trucks.indexOf(action.payload.number);
-                    // trucks.splice(index, 1);
+                        trucks_count[action.payload.number] += 1;
+                        // let index = trucks.indexOf(action.payload.number);
+                        // trucks.splice(index, 1);
+                    }
                 }
                 return job;
             });
