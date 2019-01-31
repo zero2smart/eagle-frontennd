@@ -9,8 +9,9 @@ import {
     ORDER_LIST_SUCCEEDED,
     UPDATE_JOB_SUCCEEDED,
     SWITCH_TAB_SUCCEEDED,
+    GET_AVAILABLE_TRUCKS_SUCCEEDED,
     ACTIVE_TAB,
-    COMPLETED_TAB
+    COMPLETED_TAB,
 } from '../constants';
 import { arrayMove } from 'react-sortable-hoc';
 
@@ -19,6 +20,7 @@ const initialState = {
     jobs: [],
     jobToggleStatus: [],
     errors: {},
+    trucks: [],
     tabStatus: ACTIVE_TAB
 };
 
@@ -55,24 +57,29 @@ const dashboardReducer = handleActions(
             };
         },
         [ADD_TRUCK_TO_LIST_SUCCEEDED]: (state, action) => {
+            let trucks = state.trucks;
+
             let tmp = state.jobs.map((job, i) => {
                 if (job.job_id === action.payload.job_id) {
                     job.dispatched_trucks.push(action.payload.number);
-                    let index = job.trucks.indexOf(action.payload.number);
-                    job.trucks.splice(index, 1);
+                    let index = trucks.indexOf(action.payload.number);
+                    trucks.splice(index, 1);
                 }
                 return job;
             });
 
             return {
                 ...state,
-                jobs: tmp
+                jobs: tmp,
+                trucks: trucks
             }
         },
         [REMOVE_TRUCK_FROM_LIST_SUCCEEDED]: (state, action) => {
+            let trucks = state.trucks;
+
             let tmp = state.jobs.map((job, i) => {
                 if (job.job_id === action.payload.job_id) {
-                    job.trucks.push(action.payload.number);
+                    trucks.push(action.payload.number);
                     let index = job.dispatched_trucks.indexOf(action.payload.number);
                     job.dispatched_trucks.splice(index, 1);
                 }
@@ -81,7 +88,8 @@ const dashboardReducer = handleActions(
 
             return {
                 ...state,
-                jobs: tmp
+                jobs: tmp,
+                trucks: trucks
             }
         },
         [ORDER_LIST_SUCCEEDED]: (state, action) => {
@@ -114,7 +122,12 @@ const dashboardReducer = handleActions(
         [SWITCH_TAB_SUCCEEDED]: (state, action) => ({
             ...state,
             tabStatus: action.payload
+        }),
+        [GET_AVAILABLE_TRUCKS_SUCCEEDED]: (state, action) => ({
+            ...state,
+            trucks: action.payload.trucks
         })
+
     },
     initialState
 );

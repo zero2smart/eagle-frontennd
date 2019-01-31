@@ -13,6 +13,7 @@ export default function* rootSaga() {
         fork(dashboardSaga.watchRemoveTruckFromListAsync),
         fork(dashboardSaga.watchOrderListAsync),
         fork(dashboardSaga.watchUpdateJobAsync),
-        fork(dashboardSaga.watchSwitchTabAsync)
+        fork(dashboardSaga.watchSwitchTabAsync),
+        fork(dashboardSaga.watchGetAvailableTrucksAsync)
     ]);
 }

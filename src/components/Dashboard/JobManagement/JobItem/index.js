@@ -130,7 +130,7 @@ class JobItem extends Component {
                                     <div></div>
                                 </div>
                                 <div className="d-flex-wrap">
-                                    {this.props.job.trucks.map((n, i) => (
+                                    {this.props.trucks.map((n, i) => (
                                         <div className="truck-number" onClick={() => this.addTruck(n, i)} ref={node => this.truckElements[i] = node} key={i}>
                                             {n}
                                         </div>
@@ -201,7 +201,8 @@ JobItem.propTypes = {
     applyToggleStatus: PropTypes.func.isRequired,
     className: PropTypes.string.isRequired,
     status: PropTypes.number.isRequired,
-    hasSearchKeyword: PropTypes.bool.isRequired
+    hasSearchKeyword: PropTypes.bool.isRequired,
+    trucks: PropTypes.array.isRequired
 }
 
 JobItem.defaultProps = {

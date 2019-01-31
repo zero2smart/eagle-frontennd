@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 import JobItem from './JobItem';
-import { getJobsAction } from '../../../actions';
+import { getJobsAction, getAvailableTrucksAction } from '../../../actions';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import {
@@ -25,6 +25,7 @@ class JobManagement extends Component {
 
     componentDidMount() {
         this.props.getJobsAction();
+        this.props.getAvailableTrucks();
     }
 
     shouldComponentUpdate(prevProps, prevState) {
@@ -64,6 +65,7 @@ class JobManagement extends Component {
                                         job={job}
                                         index={i}
                                         idx={i}
+                                        trucks={this.props.trucks}
                                         className={isAllMinus ? 'o-100' : ''}
                                         hasSearchKeyword={this.props.searchTerm.length === 0 ? false : true}
                                         applyToggleStatus={this.applyToggleStatus}
@@ -84,6 +86,7 @@ class JobManagement extends Component {
                                         job={job}
                                         index={i}
                                         idx={i}
+                                        trucks={this.props.trucks}
                                         className={isAllMinus ? 'o-100' : ''}
                                         applyToggleStatus={this.applyToggleStatus}
                                         hasSearchKeyword={this.props.searchTerm.length === 0 ? false : true}
@@ -104,17 +107,21 @@ JobManagement.propTypes = {
     searchTerm: PropTypes.string.isRequired,
     startDate: PropTypes.object.isRequired,
     endDate: PropTypes.object.isRequired,
-    tabStatus: PropTypes.number.isRequired
+    tabStatus: PropTypes.number.isRequired,
+    getJobsAction: PropTypes.func.isRequired,
+    getAvailableTrucks: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     jobs: state.dashboard.jobs,
     jobToggleStatus: state.dashboard.jobToggleStatus,
-    tabStatus: state.dashboard.tabStatus
+    tabStatus: state.dashboard.tabStatus,
+    trucks: state.dashboard.trucks
 });
 
 const mapDispatchToProps = dispatch => ({
-    getJobsAction: () => dispatch(getJobsAction())
+    getJobsAction: () => dispatch(getJobsAction()),
+    getAvailableTrucks: () => dispatch(getAvailableTrucksAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SortableContainer(JobManagement));

@@ -26,7 +26,10 @@ import {
     UPDATE_JOB_FAILED,
     SWITCH_TAB,
     SWITCH_TAB_SUCCEEDED,
-    SWITCH_TAB_FAILED
+    SWITCH_TAB_FAILED,
+    GET_AVAILABLE_TRUCKS,
+    GET_AVAILABLE_TRUCKS_SUCCEEDED,
+    GET_AVAILABLE_TRUCKS_FAILED
 } from '../constants';
 import JobService from '../api/JobService';
 
@@ -103,6 +106,15 @@ function* switchTabAsync(action) {
     }
 }
 
+function* getAvailableTrucksAsync(action) {
+    try {
+        const trucks = yield call(JobService.fetchAvailableTrucks);
+        yield put({ type: GET_AVAILABLE_TRUCKS_SUCCEEDED, payload: trucks.data });
+    } catch (e) {
+        yield put({ type: GET_AVAILABLE_TRUCKS_FAILED, message: e.message });
+    }
+}
+
 export function* watchToggleSideBarAsync() {
     yield takeEvery(TOGGLE_SIDEBAR, toggleSideBarAsync);
 }
@@ -137,4 +149,8 @@ export function* watchUpdateJobAsync() {
 
 export function* watchSwitchTabAsync() {
     yield takeEvery(SWITCH_TAB, switchTabAsync);
+}
+
+export function* watchGetAvailableTrucksAsync() {
+    yield takeEvery(GET_AVAILABLE_TRUCKS, getAvailableTrucksAsync);
 }
