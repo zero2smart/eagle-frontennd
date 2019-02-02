@@ -18,7 +18,7 @@ import { arrayMove } from 'react-sortable-hoc';
 const initialState = {
     showSideBar: false,
     jobs: [],
-    jobToggleStatus: [],
+    jobToggleStatus: {},
     errors: {},
     trucks: [],
     trucksCount: {},
@@ -37,7 +37,7 @@ const dashboardReducer = handleActions(
         }),
         [CHANGE_JOB_TOGGLE_STATUS_SUCCEEDED]: (state, action) => {
             let tmp = state.jobToggleStatus;
-            tmp[action.payload.index] = action.payload.status;
+            tmp[action.payload.jobID] = action.payload.status;
 
             return {
                 ...state,
@@ -45,16 +45,20 @@ const dashboardReducer = handleActions(
             };
         },
         [REMOVE_JOB_IN_ACTIVE_SUCCEEDED]: (state, action) => {
+            let status = state.jobToggleStatus;
+
             let tmp = state.jobs.map((job, i) => {
                 if (job.job_id === action.payload) {
                     job.status = "completed";
+                    delete status[job.job_id];
                 }
                 return job;
             });
 
             return {
                 ...state,
-                jobs: tmp
+                jobs: tmp,
+                jobToggleStatus: status
             };
         },
         [ADD_TRUCK_TO_LIST_SUCCEEDED]: (state, action) => {

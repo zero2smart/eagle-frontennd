@@ -49,6 +49,8 @@ class JobItem extends Component {
         setTimeout(() => {
             this.props.removeJobInActive(this.props.job.job_id);
         }, 300);
+
+        this.props.update();
     }
 
     openEditJobDialog() {
@@ -63,13 +65,13 @@ class JobItem extends Component {
 
     toggleTruckList() {
         this.setState({ showTruckList: !this.state.showTruckList }, () => {
-            this.props.changeJobToggleStatus(this.props.idx, this.state.showTruckList);
+            this.props.changeJobToggleStatus(this.props.job.job_id, this.state.showTruckList);
             this.props.applyToggleStatus(this.props.jobToggleStatus);
         });
     }
 
     componentDidMount() {
-        this.props.changeJobToggleStatus(this.props.idx, this.state.showTruckList);
+        this.props.changeJobToggleStatus(this.props.job.job_id, this.state.showTruckList);
     }
 
     addTruck(n, i) {
@@ -104,137 +106,135 @@ class JobItem extends Component {
 
         if (this.props.status === ACTIVE_TAB) {
             return (
-                this.props.job.status === "active" ?
-                    <React.Fragment>
-                        <tr className={`${!this.state.showTruckList ? 'o-30' : 'o-100'} ${this.props.hasSearchKeyword ? 'o-100' : ''} ${this.props.className}`}>
-                            <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
-                            <td>{this.props.job.quarry_name}</td>
-                            <td>{this.props.job.quarry_address}</td>
-                            <td>{this.props.job.material}</td>
-                            <td>{this.props.job.customer_name}</td>
-                            <td>{this.props.job.job_site}</td>
-                            <td>{this.props.job.quantity}</td>
-                            <td>{this.props.job.haul_rate}</td>
-                            <td>
-                                <div className="job-list">
-                                    <div className="add-trucks">
-                                        {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
-                                        {!this.state.showTruckList ?
-                                            <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
-                                            : <FontAwesomeIcon className="fa-my-check" icon={faCheck} onClick={this.toggleTruckList} />
-                                        }
-                                    </div>
-                                    <div className="job-item">
-                                        {this.props.job.dispatched_trucks.map((n, i) => {
-                                            let style = {};
-
-                                            if (this.props.trucksCount[n] === 1)
-                                                style = {
-                                                    backgroundColor: '#626269',
-                                                    border: '1px solid #626269'
-                                                };
-                                            else if (this.props.trucksCount[n] === 2)
-                                                style = {
-                                                    backgroundColor: '#CFD15D',
-                                                    border: '1px solid #CFD15D'
-                                                };
-                                            else if (this.props.trucksCount[n] > 2)
-                                                style = {
-                                                    backgroundColor: '#FF0000',
-                                                    border: '1px solid #FF0000'
-                                                };
-
-                                            return <div
-                                                className="job-number"
-                                                onClick={() => this.removeTruck(n, i)}
-                                                key={i}>
-                                                {n}
-                                            </div>;
-                                        })}
-                                    </div>
+                <React.Fragment>
+                    <tr className={`${!this.state.showTruckList ? 'o-30' : 'o-100'} ${this.props.hasSearchKeyword ? 'o-100' : ''} ${this.props.className}`}>
+                        <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
+                        <td>{this.props.job.quarry_name}</td>
+                        <td>{this.props.job.quarry_address}</td>
+                        <td>{this.props.job.material}</td>
+                        <td>{this.props.job.customer_name}</td>
+                        <td>{this.props.job.job_site}</td>
+                        <td>{this.props.job.quantity}</td>
+                        <td>{this.props.job.haul_rate}</td>
+                        <td>
+                            <div className="job-list">
+                                <div className="add-trucks">
+                                    {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
+                                    {!this.state.showTruckList ?
+                                        <img src={faPlus} className="fa-my-plus-square" alt="Plus Square" width={20} height={20} onClick={this.toggleTruckList} />
+                                        : <FontAwesomeIcon className="fa-my-check" icon={faCheck} onClick={this.toggleTruckList} />
+                                    }
                                 </div>
-                            </td>
-                            <td>
-                                <div onClick={this.setJobToComplete} className={`${this.state.checked ? 'checked' : ''}`}></div>
-                            </td>
-                        </tr>
-                        <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section ${this.props.className}`}>
-                            <div className="truck-list">
-                                <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <div className="d-flex-wrap">
-                                    {this.props.trucks.map((n, i) => {
+                                <div className="job-item">
+                                    {this.props.job.dispatched_trucks.map((n, i) => {
                                         let style = {};
 
                                         if (this.props.trucksCount[n] === 1)
-                                            style = grey;
+                                            style = {
+                                                backgroundColor: '#626269',
+                                                border: '1px solid #626269'
+                                            };
                                         else if (this.props.trucksCount[n] === 2)
-                                            style = yellow;
+                                            style = {
+                                                backgroundColor: '#CFD15D',
+                                                border: '1px solid #CFD15D'
+                                            };
                                         else if (this.props.trucksCount[n] > 2)
-                                            style = red;
+                                            style = {
+                                                backgroundColor: '#FF0000',
+                                                border: '1px solid #FF0000'
+                                            };
 
                                         return <div
-                                            className="truck-number"
-                                            onClick={() => this.addTruck(n, i)}
-                                            ref={node => this.truckElements[i] = node}
-                                            style={style}
+                                            className="job-number"
+                                            onClick={() => this.removeTruck(n, i)}
                                             key={i}>
                                             {n}
                                         </div>;
                                     })}
                                 </div>
                             </div>
-                        </tr>
-                        <EditJob
-                            className="edit-job-modal"
-                            modal={this.state.modal}
-                            trucks={this.props.job.dispatched_trucks}
-                            job={this.props.job}
-                            openEditJobDialog={this.openEditJobDialog} />
-                    </React.Fragment> : <tr />
+                        </td>
+                        <td>
+                            <div onClick={this.setJobToComplete} className={`${this.state.checked ? 'checked' : ''}`}></div>
+                        </td>
+                    </tr>
+                    <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section ${this.props.className}`}>
+                        <div className="truck-list">
+                            <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div className="d-flex-wrap">
+                                {this.props.trucks.map((n, i) => {
+                                    let style = {};
+
+                                    if (this.props.trucksCount[n] === 1)
+                                        style = grey;
+                                    else if (this.props.trucksCount[n] === 2)
+                                        style = yellow;
+                                    else if (this.props.trucksCount[n] > 2)
+                                        style = red;
+
+                                    return <div
+                                        className="truck-number"
+                                        onClick={() => this.addTruck(n, i)}
+                                        ref={node => this.truckElements[i] = node}
+                                        style={style}
+                                        key={i}>
+                                        {n}
+                                    </div>;
+                                })}
+                            </div>
+                        </div>
+                    </tr>
+                    <EditJob
+                        className="edit-job-modal"
+                        modal={this.state.modal}
+                        trucks={this.props.job.dispatched_trucks}
+                        job={this.props.job}
+                        openEditJobDialog={this.openEditJobDialog} />
+                </React.Fragment>
             );
         } else if (this.props.status === COMPLETED_TAB) {
             return (
-                this.props.job.status === "completed" ?
-                    <React.Fragment>
-                        <tr className={`${this.props.className}`}>
-                            <th scope="completed" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
-                            <td>{this.props.job.quarry_name}</td>
-                            <td>{this.props.job.quarry_address}</td>
-                            <td>{this.props.job.material}</td>
-                            <td>{this.props.job.customer_name}</td>
-                            <td>{this.props.job.job_site}</td>
-                            <td>{this.props.job.quantity}</td>
-                            <td>{this.props.job.haul_rate}</td>
-                            <td>
-                                <div className="job-list">
-                                    <div className="add-trucks">
-                                        {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
-                                        <img src={faPlusDisabled} className="fa-my-plus-square-disabled" alt="Plus Square Disabled" width={20} height={20} />
-                                    </div>
-                                    <div className="job-item">
-                                        {this.props.job.dispatched_trucks.map((n, i) => (
-                                            <div className="job-number" key={i}>
-                                                {n}
-                                            </div>
-                                        ))}
-                                    </div>
+                <React.Fragment>
+                    <tr className={`${this.props.className}`}>
+                        <th scope="completed" onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
+                        <td>{this.props.job.quarry_name}</td>
+                        <td>{this.props.job.quarry_address}</td>
+                        <td>{this.props.job.material}</td>
+                        <td>{this.props.job.customer_name}</td>
+                        <td>{this.props.job.job_site}</td>
+                        <td>{this.props.job.quantity}</td>
+                        <td>{this.props.job.haul_rate}</td>
+                        <td>
+                            <div className="job-list">
+                                <div className="add-trucks">
+                                    {/* <FontAwesomeIcon className="fa-my-plus-square" color="#E3E3E3" icon={faPlusSquare} onClick={this.toggleSideBar} /> */}
+                                    <img src={faPlusDisabled} className="fa-my-plus-square-disabled" alt="Plus Square Disabled" width={20} height={20} />
                                 </div>
-                            </td>
-                            <td>
-                                <div></div>
-                            </td>
-                        </tr>
-                        <EditJob
-                            className="edit-job-modal"
-                            modal={this.state.modal}
-                            trucks={this.props.job.dispatched_trucks}
-                            job={this.props.job}
-                            openEditJobDialog={this.openEditJobDialog} />
-                    </React.Fragment> : <tr />
+                                <div className="job-item">
+                                    {this.props.job.dispatched_trucks.map((n, i) => (
+                                        <div className="job-number" key={i}>
+                                            {n}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div></div>
+                        </td>
+                    </tr>
+                    <EditJob
+                        className="edit-job-modal"
+                        modal={this.state.modal}
+                        trucks={this.props.job.dispatched_trucks}
+                        job={this.props.job}
+                        openEditJobDialog={this.openEditJobDialog} />
+                </React.Fragment>
             );
         }
     }
@@ -253,7 +253,8 @@ JobItem.propTypes = {
     status: PropTypes.number.isRequired,
     hasSearchKeyword: PropTypes.bool.isRequired,
     trucks: PropTypes.array.isRequired,
-    trucksCount: PropTypes.object.isRequired
+    trucksCount: PropTypes.object.isRequired,
+    update: PropTypes.func.isRequired
 }
 
 JobItem.defaultProps = {
@@ -267,7 +268,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    changeJobToggleStatus: (index, status) => dispatch(changeJobToggleStatusAction({ index: index, status: status })),
+    changeJobToggleStatus: (jobID, status) => dispatch(changeJobToggleStatusAction({ jobID: jobID, status: status })),
     removeJobInActive: (id) => dispatch(removeJobInActiveAction(id)),
     addTruckToList: (job_id, number) => dispatch(addTruckToListAction({ job_id: job_id, number: number })),
     removeTruckFromList: (job_id, number) => dispatch(removeTruckFromListAction({ job_id: job_id, number: number }))
