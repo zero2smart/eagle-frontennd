@@ -22,6 +22,7 @@ import {
 import MapContainer from './MapContainer';
 import { connect } from 'react-redux';
 import { updateJobAction } from '../../../../../actions';
+import { COMPLETED_TAB } from '../../../../../constants';
 
 class EditJob extends Component {
     constructor(props) {
@@ -85,7 +86,7 @@ class EditJob extends Component {
                 </div> */}
                 <div className="header-options">
                     <Button onClick={this.props.openEditJobDialog} className="btn__close">Close</Button>
-                    <Button onClick={this.onUpdate} className="btn__update">Update</Button>
+                    <Button onClick={this.onUpdate} className="btn__update" disabled={this.props.tabStatus === COMPLETED_TAB ? true: false}>Update</Button>
                 </div>
                 <ModalHeader toggle={this.props.openEditJobDialog}>
                     {this.props.job.job_id}
@@ -93,39 +94,39 @@ class EditJob extends Component {
                 <ModalBody>
                     <Row>
                         <div className="job-field w-192">
-                            <label for="customerName">Customer Name</label>
+                            <label htmlFor="customerName">Customer Name</label>
                             <span name="customerName" id="customerName">{this.props.job.customer_name}</span>
                         </div>
                         <div className="job-field w-192">
-                            <label for="quarryCodeName">Quarry Code Name</label>
+                            <label htmlFor="quarryCodeName">Quarry Code Name</label>
                             <span name="quarryCodeName" id="quarryCodeName">{this.props.job.quarry_name}</span>
                         </div>
                         <div className="job-field w-192">
-                            <label for="material">Material</label>
+                            <label htmlFor="material">Material</label>
                             <span name="material" id="material">{this.props.job.material}</span>
                         </div>
                         <div className="job-field w-192">
-                            <label for="jobName">Job Name</label>
+                            <label htmlFor="jobName">Job Name</label>
                             <span name="jobName" id="jobName">{this.props.job.job_site}</span>
                         </div>
                     </Row>
                     <Row>
                         <div className="job-field w-402">
-                            <label for="deliveryAddress">Delivery Address</label>
+                            <label htmlFor="deliveryAddress">Delivery Address</label>
                             <span name="deliveryAddress" id="deliveryAddress">{this.props.job.quarry_address}</span>
                         </div>
                         <div className="job-field w-192">
-                            <label for="remarks">Remarks</label>
-                            <input type="text" name="remarks" id="remarks" onChange={this.onChange} defaultValue={this.props.job.quantity} />
+                            <label htmlFor="remarks">Remarks</label>
+                            <input type="text" name="remarks" id="remarks" onChange={this.onChange} defaultValue={this.props.job.quantity} disabled={this.props.tabStatus === COMPLETED_TAB ? true : false} />
                         </div>
                         <div className="job-field w-192">
-                            <label for="truckRate">Truck Rate</label>
+                            <label htmlFor="truckRate">Truck Rate</label>
                             <span name="truckRate" id="truckRate">{this.props.job.haul_rate}</span>
                         </div>
                     </Row>
                     <Row>
                         <div className="job-field w-822">
-                            <label for="Trucks">Trucks</label>
+                            <label htmlFor="Trucks">Trucks</label>
                             <div name="trucks" id="trucks">
                                 {this.props.trucks.map((n, i) => (
                                     <div className="job-number" key={i}>
@@ -154,11 +155,12 @@ EditJob.propTypes = {
     openEditJobDialog: PropTypes.func.isRequired,
     trucks: PropTypes.array.isRequired,
     job: PropTypes.object.isRequired,
-    updateJob: PropTypes.func.isRequired
+    updateJob: PropTypes.func.isRequired,
+    tabStatus: PropTypes.number.isRequired
 };
 
 const mapStateToProps = state => ({
-
+    tabStatus: state.dashboard.tabStatus
 });
 
 const mapDispatchToProps = dispatch => ({
