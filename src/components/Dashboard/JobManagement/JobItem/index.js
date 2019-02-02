@@ -243,7 +243,7 @@ class JobItem extends Component {
 JobItem.propTypes = {
     job: PropTypes.object.isRequired,
     idx: PropTypes.number.isRequired,
-    jobToggleStatus: PropTypes.array.isRequired,
+    jobToggleStatus: PropTypes.object.isRequired,
     changeJobToggleStatus: PropTypes.func.isRequired,
     removeJobInActive: PropTypes.func.isRequired,
     addTruckToList: PropTypes.func.isRequired,
@@ -254,7 +254,6 @@ JobItem.propTypes = {
     hasSearchKeyword: PropTypes.bool.isRequired,
     trucks: PropTypes.array.isRequired,
     trucksCount: PropTypes.object.isRequired,
-    update: PropTypes.func.isRequired
 }
 
 JobItem.defaultProps = {

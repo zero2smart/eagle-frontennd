@@ -37,10 +37,6 @@ class JobManagement extends Component {
         this.setState({ jobToggleStatus: jts });
     }
 
-    update() {
-
-    }
-
     render() {
         let jts = this.state.jobToggleStatus;
         let dd = {
@@ -76,7 +72,6 @@ class JobManagement extends Component {
                                         className={isAllMinus ? 'o-100' : ''}
                                         hasSearchKeyword={this.props.searchTerm.length === 0 ? false : true}
                                         applyToggleStatus={this.applyToggleStatus}
-                                        update={this.update}
                                         status={this.props.status} />;
                             }) :
                                 this.props.jobs.filter(job => job.status === "completed").filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1
@@ -115,7 +110,7 @@ class JobManagement extends Component {
 
 JobManagement.propTypes = {
     jobs: PropTypes.array.isRequired,
-    jobToggleStatus: PropTypes.array.isRequired,
+    jobToggleStatus: PropTypes.object.isRequired,
     status: PropTypes.number.isRequired,
     searchTerm: PropTypes.string.isRequired,
     startDate: PropTypes.object.isRequired,
