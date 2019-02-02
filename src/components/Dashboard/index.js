@@ -29,7 +29,19 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+
         this.props.switchTab(ACTIVE_TAB);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    handleClickOutside = (event) => {
+        if (this.state.openCalendar && this.calendarRef && !this.calendarRef.contains(event.target)) {
+            this.toggleCalendar();
+        }
     }
 
     onSearch(e) {
@@ -132,7 +144,7 @@ class Dashboard extends Component {
                         startDate={this.state.startDate}
                         endDate={this.state.endDate} />
                 </div>
-                <div className={`${this.state.openCalendar ? '' : 'd-none'} calendar`}>
+                <div className={`${this.state.openCalendar ? '' : 'd-none'} calendar`} ref={node => this.calendarRef = node}>
                     <div className="title">PICK RANGE DATE</div>
                     <DateRange
                         onChange={this.handleChange}
