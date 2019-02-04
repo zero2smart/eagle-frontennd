@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { DateRange, Calendar } from 'react-date-range';
 import { connect } from 'react-redux';
-import { orderListAction, switchTabAction } from '../../actions';
+import { orderListAction, switchTabAction, getJobsAction } from '../../actions';
 import moment from 'moment';
 
 class Dashboard extends Component {
@@ -32,6 +32,7 @@ class Dashboard extends Component {
         document.addEventListener('mousedown', this.handleClickOutside);
 
         this.props.switchTab(ACTIVE_TAB);
+        this.props.getJobsAction();
     }
 
     componentWillUnmount() {
@@ -98,6 +99,10 @@ class Dashboard extends Component {
         return div.firstChild;
     }
 
+    componentWillReceiveProps(nextProps) {
+
+    }
+
     render() {
         const activeStyle = {
             borderBottom: '3px solid #21D2F9'
@@ -142,6 +147,7 @@ class Dashboard extends Component {
                         onSortEnd={this.props.onSortEnd}
                         helperClass="sort"
                         startDate={this.state.startDate}
+                        jobs={this.props.jobs}
                         endDate={this.state.endDate} />
                 </div>
                 <div className={`${this.state.openCalendar ? '' : 'd-none'} calendar`} ref={node => this.calendarRef = node}>
@@ -159,7 +165,9 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
     jobs: PropTypes.array.isRequired,
     switchTab: PropTypes.func.isRequired,
-    tabStatus: PropTypes.number.isRequired
+    tabStatus: PropTypes.number.isRequired,
+    jobs: PropTypes.array.isRequired,
+    changeJobToggleStatus: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -168,6 +176,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    getJobsAction: () => dispatch(getJobsAction()),
     onSortEnd: ({ oldIndex, newIndex }) => dispatch(orderListAction({ oldIndex, newIndex })),
     switchTab: (status) => dispatch(switchTabAction(status))
 });

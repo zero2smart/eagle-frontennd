@@ -24,7 +24,6 @@ class JobManagement extends Component {
     }
 
     componentDidMount() {
-        this.props.getJobsAction();
         this.props.getAvailableTrucks();
     }
 
@@ -42,6 +41,8 @@ class JobManagement extends Component {
             opacity: 1 + ' !important',
             zIndex: 100
         };
+
+        console.log(jts);
 
         return (
             <div className="job-management-container">
@@ -66,6 +67,7 @@ class JobManagement extends Component {
                                         key={job.job_id}
                                         job={job}
                                         index={i}
+                                        showTruckList={jts[job.job_id]}
                                         idx={i}
                                         trucks={this.props.trucks}
                                         className={isAllMinus ? 'o-100' : ''}
@@ -92,6 +94,7 @@ class JobManagement extends Component {
                                         key={job.job_id}
                                         job={job}
                                         index={i}
+                                        showTruckList={jts[job.job_id]}
                                         idx={i}
                                         trucks={this.props.trucks}
                                         className={isAllMinus ? 'o-100' : ''}
@@ -115,20 +118,17 @@ JobManagement.propTypes = {
     startDate: PropTypes.object.isRequired,
     endDate: PropTypes.object.isRequired,
     tabStatus: PropTypes.number.isRequired,
-    getJobsAction: PropTypes.func.isRequired,
     getAvailableTrucks: PropTypes.func.isRequired,
     trucks: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
-    jobs: state.dashboard.jobs,
     jobToggleStatus: state.dashboard.jobToggleStatus,
     tabStatus: state.dashboard.tabStatus,
     trucks: state.dashboard.trucks
 });
 
 const mapDispatchToProps = dispatch => ({
-    getJobsAction: () => dispatch(getJobsAction()),
     getAvailableTrucks: () => dispatch(getAvailableTrucksAction())
 });
 

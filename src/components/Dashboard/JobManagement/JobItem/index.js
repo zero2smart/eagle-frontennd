@@ -27,7 +27,7 @@ class JobItem extends Component {
         super(props);
 
         this.state = {
-            showTruckList: false,
+            showTruckList: this.props.showTruckList,
             truckStatusList: [],
             modal: false,
             checked: false
@@ -49,8 +49,6 @@ class JobItem extends Component {
         setTimeout(() => {
             this.props.removeJobInActive(this.props.job.job_id);
         }, 300);
-
-        this.props.update();
     }
 
     openEditJobDialog() {
@@ -71,7 +69,7 @@ class JobItem extends Component {
     }
 
     componentDidMount() {
-        this.props.changeJobToggleStatus(this.props.job.job_id, this.state.showTruckList);
+
     }
 
     addTruck(n, i) {
@@ -254,11 +252,13 @@ JobItem.propTypes = {
     hasSearchKeyword: PropTypes.bool.isRequired,
     trucks: PropTypes.array.isRequired,
     trucksCount: PropTypes.object.isRequired,
+    showTruckList: PropTypes.bool.isRequired
 }
 
 JobItem.defaultProps = {
     status: ACTIVE_TAB,
-    hasSearchKeyword: false
+    hasSearchKeyword: false,
+    showTruckList: false
 }
 
 const mapStateToProps = state => ({
