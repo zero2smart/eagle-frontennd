@@ -52,9 +52,7 @@ class EditJob extends Component {
     onChange = (e) => {
         let fields = {...this.state.fields};
         fields[e.target.name] = e.target.value;
-        this.setState({fields}, () => {
-            console.log(this.state.fields);
-        });
+        this.setState({ fields });
     }
 
     onUpdate = () => {

@@ -11,7 +11,6 @@ import {
     SWITCH_TAB_SUCCEEDED,
     GET_AVAILABLE_TRUCKS_SUCCEEDED,
     ACTIVE_TAB,
-    COMPLETED_TAB,
 } from '../constants';
 import { arrayMove } from 'react-sortable-hoc';
 
@@ -110,8 +109,7 @@ const dashboardReducer = handleActions(
         [ORDER_LIST_SUCCEEDED]: (state, action) => {
             return {
                 ...state,
-                jobs: arrayMove(state.jobs, action.payload.oldIndex, action.payload.newIndex),
-                jobToggleStatus: arrayMove(state.jobToggleStatus, action.payload.oldIndex, action.payload.newIndex)
+                jobs: arrayMove(state.jobs, action.payload.oldIndex, action.payload.newIndex)
             };
         },
         [UPDATE_JOB_SUCCEEDED]: (state, action) => {
@@ -142,7 +140,6 @@ const dashboardReducer = handleActions(
             ...state,
             trucks: action.payload
         })
-
     },
     initialState
 );

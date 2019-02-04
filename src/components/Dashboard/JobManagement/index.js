@@ -29,7 +29,6 @@ class JobManagement extends Component {
     }
 
     shouldComponentUpdate(prevProps, prevState) {
-        console.log(prevState);
         return true;
     }
 
