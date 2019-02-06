@@ -19,7 +19,7 @@ class Dashboard extends Component {
             searchTerm: '',
             startDate: moment('1999-01-01'),
             endDate: moment(),
-            styles: {}
+            isSorting: false
         };
 
         this.onSwitchTab = this.onSwitchTab.bind(this);
@@ -27,7 +27,8 @@ class Dashboard extends Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
-        this.onSortMove = this.onSortMove.bind(this);
+        this.onSortStart = this.onSortStart.bind(this);
+        this.onSortEnd = this.onSortEnd.bind(this);
     }
 
     componentDidMount() {
@@ -105,10 +106,13 @@ class Dashboard extends Component {
 
     }
 
-    onSortMove() {
-        this.setState({ styles: {
-            background: '#ff0000 !important'
-        }});
+    onSortStart() {
+        this.setState({ isSorting: true });
+    }
+
+    onSortEnd({ oldIndex, newIndex }) {
+        this.setState({ isSorting: false });
+        this.props.onSortEnd({ oldIndex, newIndex });
     }
 
     render() {
@@ -152,10 +156,9 @@ class Dashboard extends Component {
                         searchTerm={this.state.searchTerm}
                         status={this.props.tabStatus}
                         axis="xy"
-                        onSortEnd={this.props.onSortEnd}
-                        onSortMove={this.onSortMove}
-                        styles={this.state.styles}
-                        helperClass="sort"
+                        onSortEnd={this.onSortEnd}
+                        onSortStart={this.onSortStart}
+                        isSorting={this.state.isSorting}
                         startDate={this.state.startDate}
                         jobs={this.props.jobs}
                         endDate={this.state.endDate} />
