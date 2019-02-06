@@ -158,34 +158,36 @@ class JobItem extends Component {
                         </td>
                     </tr>
                     <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section ${this.props.className}`}>
-                        <div className="truck-list">
-                            <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                            <div className="d-flex-wrap">
-                                {this.props.trucks.map((n, i) => {
-                                    let style = {};
+                        <td>
+                            <div className="truck-list">
+                                <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div className="d-flex-wrap">
+                                    {this.props.trucks.map((n, i) => {
+                                        let style = {};
 
-                                    if (this.props.trucksCount[n] === 1)
-                                        style = grey;
-                                    else if (this.props.trucksCount[n] === 2)
-                                        style = yellow;
-                                    else if (this.props.trucksCount[n] > 2)
-                                        style = red;
+                                        if (this.props.trucksCount[n] === 1)
+                                            style = grey;
+                                        else if (this.props.trucksCount[n] === 2)
+                                            style = yellow;
+                                        else if (this.props.trucksCount[n] > 2)
+                                            style = red;
 
-                                    return <div
-                                        className="truck-number"
-                                        onClick={() => this.addTruck(n, i)}
-                                        ref={node => this.truckElements[i] = node}
-                                        style={style}
-                                        key={i}>
-                                        {n}
-                                    </div>;
-                                })}
+                                        return <div
+                                            className="truck-number"
+                                            onClick={() => this.addTruck(n, i)}
+                                            ref={node => this.truckElements[i] = node}
+                                            style={style}
+                                            key={i}>
+                                            {n}
+                                        </div>;
+                                    })}
+                                </div>
                             </div>
-                        </div>
+                        </td>
                     </tr>
                     <EditJob
                         className="edit-job-modal"
