@@ -18,7 +18,8 @@ class Dashboard extends Component {
             openCalendar: false,
             searchTerm: '',
             startDate: moment('1999-01-01'),
-            endDate: moment()
+            endDate: moment(),
+            styles: {}
         };
 
         this.onSwitchTab = this.onSwitchTab.bind(this);
@@ -26,6 +27,7 @@ class Dashboard extends Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
+        this.onSortMove = this.onSortMove.bind(this);
     }
 
     componentDidMount() {
@@ -103,6 +105,12 @@ class Dashboard extends Component {
 
     }
 
+    onSortMove() {
+        this.setState({ styles: {
+            background: '#ff0000 !important'
+        }});
+    }
+
     render() {
         const activeStyle = {
             borderBottom: '3px solid #21D2F9'
@@ -145,6 +153,8 @@ class Dashboard extends Component {
                         status={this.props.tabStatus}
                         axis="xy"
                         onSortEnd={this.props.onSortEnd}
+                        onSortMove={this.onSortMove}
+                        styles={this.state.styles}
                         helperClass="sort"
                         startDate={this.state.startDate}
                         jobs={this.props.jobs}
@@ -166,8 +176,7 @@ Dashboard.propTypes = {
     jobs: PropTypes.array.isRequired,
     switchTab: PropTypes.func.isRequired,
     tabStatus: PropTypes.number.isRequired,
-    jobs: PropTypes.array.isRequired,
-    changeJobToggleStatus: PropTypes.func.isRequired
+    jobs: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({

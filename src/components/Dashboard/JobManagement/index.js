@@ -42,8 +42,6 @@ class JobManagement extends Component {
             zIndex: 100
         };
 
-        console.log(jts);
-
         return (
             <div className="job-management-container">
                 <Table>
@@ -73,6 +71,7 @@ class JobManagement extends Component {
                                         className={isAllMinus ? 'o-100' : ''}
                                         hasSearchKeyword={this.props.searchTerm.length === 0 ? false : true}
                                         applyToggleStatus={this.applyToggleStatus}
+                                        styles={this.props.styles}
                                         status={this.props.status} />;
                             }) :
                                 this.props.jobs.filter(job => job.status === "completed").filter(job => job.job_id.toString().indexOf(this.props.searchTerm) !== -1
