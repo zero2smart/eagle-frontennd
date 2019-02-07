@@ -34,6 +34,29 @@ class MapContainer extends Component {
     };
 
     render() {
+        const points = [{
+                lat: 42.02,
+                lng: -77.01
+            },
+            {
+                lat: 42.03,
+                lng: -77.02
+            },
+            {
+                lat: 41.03,
+                lng: -77.04
+            },
+            {
+                lat: 42.05,
+                lng: -77.02
+            }
+        ];
+
+        let bounds = new this.props.google.maps.LatLngBounds();
+        for (let i = 0; i < points.length; i++) {
+            bounds.extend(points[i]);
+        }
+
         return (
             <Map
                 google={this.props.google}
@@ -43,10 +66,11 @@ class MapContainer extends Component {
                     lat: 40.756795,
                     lng: -73.954298
                 }}
+                bounds={bounds}
             >
                 <Marker
                     onClick={this.onMarkerClick}
-                    name={'Kenyatta International Convention Centre'}
+                    name={'Current location'}
                 />
                 <InfoWindow
                     marker={this.state.activeMarker}
