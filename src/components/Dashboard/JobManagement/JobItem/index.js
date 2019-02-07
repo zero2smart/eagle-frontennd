@@ -105,7 +105,7 @@ class JobItem extends Component {
         if (this.props.status === ACTIVE_TAB) {
             return (
                 <React.Fragment>
-                    <tr className={`${this.props.className}`}>
+                    <tr className={`${this.props.isSorting ? 'dragging' : ''} ${!this.state.showTruckList ? '' : 'o-100'} ${this.props.hasSearchKeyword ? 'o-100' : ''} ${this.props.className}`} style={this.props.styles}>
                         <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                         <td>{this.props.job.quarry_name}</td>
                         <td>{this.props.job.quarry_address}</td>
@@ -158,36 +158,34 @@ class JobItem extends Component {
                         </td>
                     </tr>
                     <tr className={`${!this.state.showTruckList ? 'd-none' : ''} truck-section ${this.props.className}`}>
-                        <td>
-                            <div className="truck-list">
-                                <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <div className="d-flex-wrap">
-                                    {this.props.trucks.map((n, i) => {
-                                        let style = {};
-
-                                        if (this.props.trucksCount[n] === 1)
-                                            style = grey;
-                                        else if (this.props.trucksCount[n] === 2)
-                                            style = yellow;
-                                        else if (this.props.trucksCount[n] > 2)
-                                            style = red;
-
-                                        return <div
-                                            className="truck-number"
-                                            onClick={() => this.addTruck(n, i)}
-                                            ref={node => this.truckElements[i] = node}
-                                            style={style}
-                                            key={i}>
-                                            {n}
-                                        </div>;
-                                    })}
-                                </div>
+                        <div className="truck-list">
+                            <div className={`${this.props.job.dispatched_trucks.length > 0 ? 'threedot' : ''}`}>
+                                <div></div>
+                                <div></div>
+                                <div></div>
                             </div>
-                        </td>
+                            <div className="d-flex-wrap">
+                                {this.props.trucks.map((n, i) => {
+                                    let style = {};
+
+                                    if (this.props.trucksCount[n] === 1)
+                                        style = grey;
+                                    else if (this.props.trucksCount[n] === 2)
+                                        style = yellow;
+                                    else if (this.props.trucksCount[n] > 2)
+                                        style = red;
+
+                                    return <div
+                                        className="truck-number"
+                                        onClick={() => this.addTruck(n, i)}
+                                        ref={node => this.truckElements[i] = node}
+                                        style={style}
+                                        key={i}>
+                                        {n}
+                                    </div>;
+                                })}
+                            </div>
+                        </div>
                     </tr>
                     <EditJob
                         className="edit-job-modal"
