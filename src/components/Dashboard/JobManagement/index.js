@@ -10,14 +10,15 @@ import {
     SortableElement,
     arrayMove,
 } from 'react-sortable-hoc';
-import { ACTIVE_TAB, COMPLETE_TAB } from '../../../constants';
+import { ACTIVE_TAB, COMPLETED_TAB } from '../../../constants';
 
 class JobManagement extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            jobToggleStatus: []
+            jobToggleStatus: [],
+            jobs: []
         };
 
         this.applyToggleStatus = this.applyToggleStatus.bind(this);
@@ -27,8 +28,27 @@ class JobManagement extends Component {
         this.props.getAvailableTrucks();
     }
 
-    shouldComponentUpdate(prevProps, prevState) {
-        return true;
+    componentWillReceiveProps(prevProps, prevState) {
+        // if (prevProps.tabStatus === ACTIVE_TAB) {
+        //     debugger;
+        //     this.setState({
+        //         jobs: prevProps.jobs.filter(job => job.status === "active").filter(job => job.job_id.toString().indexOf(prevProps.searchTerm) !== -1
+        //             || job.customer_name.toLowerCase().indexOf(prevProps.searchTerm.toLowerCase()) !== -1
+        //             || prevProps.trucks.includes(Number(prevProps.searchTerm))
+        //             || job.dispatched_trucks.includes(Number(prevProps.searchTerm))) });
+        // } else if (prevProps.tabStatus === COMPLETED_TAB) {
+        //     this.setState({
+        //         jobs: prevProps.jobs.filter(job => job.status === "completed").filter(job => job.job_id.toString().indexOf(prevProps.searchTerm) !== -1
+        //             || job.customer_name.toLowerCase().indexOf(prevProps.searchTerm.toLowerCase()) !== -1
+        //             || prevProps.trucks.includes(Number(prevProps.searchTerm))
+        //             || job.dispatched_trucks.includes(Number(prevProps.searchTerm)))
+        //             .filter(job => new Date(job.date) >= prevProps.startDate
+        //                 && new Date(job.date) <= prevProps.endDate) });
+        // }
+
+        // console.log(this.state.jobs);
+        console.log(this.props);
+        console.log(prevProps);
     }
 
     applyToggleStatus(jts) {
@@ -96,6 +116,7 @@ class JobManagement extends Component {
                                         showTruckList={jts[job.job_id]}
                                         idx={i}
                                         trucks={this.props.trucks}
+                                        isSorting={this.props.isSorting}
                                         className={isAllMinus ? 'o-100' : ''}
                                         applyToggleStatus={this.applyToggleStatus}
                                         hasSearchKeyword={this.props.searchTerm.length === 0 ? false : true}

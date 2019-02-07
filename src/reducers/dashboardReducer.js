@@ -107,9 +107,10 @@ const dashboardReducer = handleActions(
             }
         },
         [ORDER_LIST_SUCCEEDED]: (state, action) => {
+            let tmp = state.jobs;
             return {
                 ...state,
-                jobs: arrayMove(state.jobs, action.payload.oldIndex, action.payload.newIndex)
+                jobs: arrayMove(tmp.filter(job => job.status === "completed"), action.payload.oldIndex, action.payload.newIndex)
             };
         },
         [UPDATE_JOB_SUCCEEDED]: (state, action) => {
