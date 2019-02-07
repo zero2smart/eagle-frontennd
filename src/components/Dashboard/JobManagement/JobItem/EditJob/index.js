@@ -123,7 +123,11 @@ class EditJob extends Component {
                         </div>
                     </Row>
                     <Row>
-                        <div className="job-field w-822">
+                        <div className="job-field w-192">
+                            <label htmlFor="totalMiles">Total Miles</label>
+                            <span name="totalMiles" id="totalMiles">35.16</span>
+                        </div>
+                        <div className="job-field w-612">
                             <label htmlFor="Trucks">Trucks</label>
                             <div name="trucks" id="trucks">
                                 {this.props.trucks.map((n, i) => (

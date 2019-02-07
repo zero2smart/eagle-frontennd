@@ -105,7 +105,7 @@ class JobItem extends Component {
         if (this.props.status === ACTIVE_TAB) {
             return (
                 <React.Fragment>
-                    <tr className={`${this.props.isSorting ? 'dragging' : ''} ${!this.state.showTruckList ? '' : 'o-100'} ${this.props.hasSearchKeyword ? 'o-100' : ''} ${this.props.className}`} style={this.props.styles}>
+                    <tr className={`${this.props.isSorting ? 'dragging' : ''} ${!this.state.showTruckList ? '' : 'o-100'} ${this.props.hasSearchKeyword ? 'o-100' : ''} ${this.props.className}`}>
                         <th scope="active" className={`${this.props.job.dispatched_trucks.length > 0 && !this.state.showTruckList ? 'trucks-added' : ''}`} onClick={this.openEditJobDialog}>{this.props.job.job_id}</th>
                         <td>{this.props.job.quarry_name}</td>
                         <td>{this.props.job.quarry_address}</td>
@@ -114,6 +114,7 @@ class JobItem extends Component {
                         <td>{this.props.job.job_site}</td>
                         <td>{this.props.job.quantity}</td>
                         <td>{this.props.job.haul_rate}</td>
+                        <td>35.16</td>
                         <td>
                             <div className="job-list">
                                 <div className="add-trucks">
@@ -207,6 +208,7 @@ class JobItem extends Component {
                         <td>{this.props.job.job_site}</td>
                         <td>{this.props.job.quantity}</td>
                         <td>{this.props.job.haul_rate}</td>
+                        <td>35.16</td>
                         <td>
                             <div className="job-list">
                                 <div className="add-trucks">

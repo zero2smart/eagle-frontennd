@@ -209,10 +209,14 @@ tr {
         }
 
         &:nth-child(8) {
-            width: 30px;
+            width: 50px;
         }
 
         &:nth-child(9) {
+            width: 50px;
+        }
+
+        &:nth-child(10) {
             padding: 5px 5px !important;
             position: relative;
             width: 25%;
@@ -228,7 +232,7 @@ tr {
             }
         }
 
-        &:nth-child(10) {
+        &:nth-child(11) {
             padding: 5px 5px !important;
             width: 33px;
             position: relative;
